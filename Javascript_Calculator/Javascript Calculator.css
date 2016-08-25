@@ -1,0 +1,27 @@
+#calculator{
+	width: 600px;
+	height: 800px;
+	background: #5499C7;
+	border-radius: 25px;
+	border: 5px solid;
+	margin: 0 auto;
+}
+
+#screen1{
+	width: 500px;
+	height: 100px;
+	background: #7e7e7e;	
+	border: 5px solid;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+
+#screen2{
+	width: 480px;
+	height: 80px;
+	background: #d3d3d3;
+	border-radius: 25px;
+	border: 5px solid;
+	margin: 0 auto;
+	margin-top: 5px;
+}
