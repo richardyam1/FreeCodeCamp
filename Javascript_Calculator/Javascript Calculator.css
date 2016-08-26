@@ -7,7 +7,7 @@
 	margin: 0 auto;
 }
 
-#screen1{
+#screen_border{
 	width: 500px;
 	height: 100px;
 	background: #7e7e7e;	
@@ -16,7 +16,7 @@
 	margin-top: 20px;
 }
 
-#screen2{
+#screen{
 	width: 480px;
 	height: 80px;
 	background: #d3d3d3;
@@ -24,4 +24,9 @@
 	border: 5px solid;
 	margin: 0 auto;
 	margin-top: 5px;
+}
+
+#text{
+	margin-top: 10px;
+	color: white;
 }
