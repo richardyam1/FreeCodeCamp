@@ -1,6 +1,6 @@
 #calculator{
 	width: 600px;
-	height: 800px;
+	height: 650px;
 	background: #5499C7;
 	border-radius: 25px;
 	border: 5px solid;
@@ -40,7 +40,7 @@
 	border: 2px solid;
 }
 
-#square{
+.square{
 	width: 64px;
 	height: 73px;
 	background: #545454;
@@ -52,4 +52,31 @@
 	float: right;
 	font-size: 80px;
 	margin-right: 10px;
+}
+
+.red_key{
+	background-color: red;
+	color: white;
+	width: 100px;
+	height: 50px;
+	font-size: 20px;
+	margin: 10px 11px;
+}
+
+.white_key{
+	background-color: white;
+	color: blue;
+	width: 100px;
+	height: 50px;
+	font-size: 20px;
+	margin: 10px 11px;
+}
+
+#zero{
+	width: 226px;
+}
+
+#equal{
+	height: 122px;
+	float: right;
 }
