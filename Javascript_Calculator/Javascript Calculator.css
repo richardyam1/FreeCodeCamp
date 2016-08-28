@@ -30,3 +30,26 @@
 	margin-top: 10px;
 	color: white;
 }
+
+#solar{
+	width: 280px;
+	height: 80px;
+	background: #545454;
+	clear:left;
+	display: block;
+	border: 2px solid;
+}
+
+#square{
+	width: 64px;
+	height: 73px;
+	background: #545454;
+	border:3px solid;
+	float: left;
+}
+
+#input{
+	float: right;
+	font-size: 80px;
+	margin-right: 10px;
+}
