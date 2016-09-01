@@ -1,110 +1,117 @@
 $(document).ready(function(){
 
-	var input = "";
-	var math = 0;
+	var input = 0
+	var equal = 0;
 	var equation = "";
 	var decimal = false;
-	$("#input").html(0);
+	var max = 1;
+	$("#input").html(input);
 	$("#equation").html(0);
+	$(".number").on("click",  function(){
+		if (max < 8){
+			if(input == 0){
+				input = $(this).attr('id');
+			}
+			else{
+				input += $(this).attr('id');
+				max ++;
+			}
+
+			$("#input").html(input);
+		}
+
+		
+	});
 
 	$("#clear_all").on("click", function(){
-		 input = "";
-	     equation = "";
-		$("#input").html(0);
-	    $("#equation").html(0);
+		input = 0
+	 	equal = 0;
+	 	equation = "";
+	 	decimal = false;
+	 	max = 1;
+		$("#input").html(input);
+		$("#equation").html(0);
 	});
 
-	$("#clear_one").on("click", function(){
-		 input = "";
-		$("#input").html(0);
-	});
-
-	$("#nine").on("click", function(){		
-		input += 9;
+	$("#clear_input").on("click", function(){
+		 input = 0;
+		 max = 1;
+		 decimal = false;
 		$("#input").html(input);
 	});
 
-	$("#eight").on("click", function(){
-		input += 8;
-		$("#input").html(input);
-	});
-
-	$("#seven").on("click", function(){
-		input += 7;
-		$("#input").html(input);
-	});
-
-	$("#six").on("click", function(){
-		input += 6;
-		$("#input").html(input);
-	});
-
-	$("#five").on("click", function(){
-		input += 5;
-		$("#input").html(input);
-	});
-
-	$("#four").on("click", function(){
-		input += 4;
-		$("#input").html(input);
-	});
-
-	$("#three").on("click", function(){
-		input += 3;
-		$("#input").html(input);
-	});
-
-	$("#two").on("click", function(){
-		input += 2;
-		$("#input").html(input);
-	});
-
-	$("#one").on("click", function(){
-		input += 1;
-		$("#input").html(input);
-	});
-
-	$("#zero").on("click", function(){
+	$(".zero").on("click", function(){
+		if (input != 0 && max < 8){
 		input += 0;
 		$("#input").html(input);
+		max++;
+	   }
 	});
 
 	$("#decimal").on("click", function(){
-		if (decimal == false){
+		if (decimal == false  && max < 8){
 			input += ".";
 			$("#input").html(input);
 			decimal = true;
 		}
 	});
-
-	$("#plus").on("click", function(){
-		math = parseInt(input);
-		input = "";
+	$("#plus").on("click", function(){		
+		if (equal == 0){
+			equal = input;
+		}
+		else{
+			equal += input;
+		}
+		equation += (input + " + ");
 		$("#input").html("+");
-		
+		$("#equation").html(equation);
+		input = 0;
 	});
 
-	$("#minus").on("click", function(){
-		input = "";
+	$("#minus").on("click", function(){	
+		equation += (input + " - ");
+		if (equal == 0){
+			equal = input;
+		}
+		else{
+			equal -= input;
+		}
 		$("#input").html("-");
-		
+		$("#equation").html(equation);
+		input = 0;		
 	});
 
 	$("#multiply").on("click", function(){
-		input = "";
+		if (equal == 0){
+			equal = input;
+		}
+		else{
+			equal *= input;
+		}		
+		equation += (input + " x ");
 		$("#input").html("x");
-
+		$("#equation").html(equation);
+		input = 0;
 	});
 
-	$("#divide").on("click", function(){
-		input = "";
-		$("#input").html("÷");
+	$("#divide").on("click", function(){	
+		if (equal == 0){
+			equal = input;
+		}
+		else{
+			equal = equal/input;
+		}	
+		equation += (input + " / ");
+		$("#input").html("/");
+		$("#equation").html(equation);
+		input = 0;
 
 	});
 
 	$("#equal").on("click", function(){
-		input = "";
-		$("#input").html(math.toString());
+		
+		$("#input").html(equal);
+		$("#equation").html(equal);
 	});
 
 
