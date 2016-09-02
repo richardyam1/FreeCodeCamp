@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 	var input = 0
-	var equal = 0;
+	var first_number = 0;
 	var equation = "";
 	var decimal = false;
 	var max = 1;
@@ -25,7 +25,7 @@ $(document).ready(function(){
 
 	$("#clear_all").on("click", function(){
 		input = 0
-	 	equal = 0;
+	 	first_number = 0;
 	 	equation = "";
 	 	decimal = false;
 	 	max = 1;
@@ -56,11 +56,11 @@ $(document).ready(function(){
 		}
 	});
 	$("#plus").on("click", function(){		
-		if (equal == 0){
-			equal = input;
+		if (first_number == 0){
+			first_number = input;
 		}
 		else{
-			equal += input;
+			first_number += input;
 		}
 		equation += (input + " + ");
 		$("#input").html("+");
@@ -70,11 +70,11 @@ $(document).ready(function(){
 
 	$("#minus").on("click", function(){	
 		equation += (input + " - ");
-		if (equal == 0){
-			equal = input;
+		if (first_number == 0){
+			first_number = input;
 		}
 		else{
-			equal -= input;
+			first_number -= input;
 		}
 		$("#input").html("-");
 		$("#equation").html(equation);
@@ -82,24 +82,24 @@ $(document).ready(function(){
 	});
 
 	$("#multiply").on("click", function(){
-		if (equal == 0){
-			equal = input;
+		if (first_number == 0){
+			first_number = input;
 		}
 		else{
-			equal *= input;
+			first_number *= input;
 		}		
-		equation += (input + " x ");
-		$("#input").html("x");
+		equation += (input + " * ");
+		$("#input").html("*");
 		$("#equation").html(equation);
 		input = 0;
 	});
 
 	$("#divide").on("click", function(){	
-		if (equal == 0){
-			equal = input;
+		if (first_number == 0){
+			first_number = input;
 		}
 		else{
-			equal = equal/input;
+			first_number = first_number/input;
 		}	
 		equation += (input + " / ");
 		$("#input").html("/");
@@ -109,9 +109,12 @@ $(document).ready(function(){
 	});
 
 	$("#equal").on("click", function(){
-		
-		$("#input").html(equal);
-		$("#equation").html(equal);
+		equation += input;
+		var final = eval(equation);
+		$("#input").html(final);
+		$("#equation").html(final);
+		equation = final;
+		input = "";
 	});
 
 
