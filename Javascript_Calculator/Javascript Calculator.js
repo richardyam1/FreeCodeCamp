@@ -6,6 +6,7 @@ $(document).ready(function(){
 	var decimal = false;
 	var max = 1;
 	var math_sign = false;
+	var answer = 0;
 	function reset(){
 		input = 0;
 		max = 1;
@@ -26,8 +27,6 @@ $(document).ready(function(){
 		
 			$("#input").text(input);
 		}
-	
-
 	});
 
 	$("#clear_all").on("click", function(){
@@ -122,11 +121,11 @@ $(document).ready(function(){
 
 	$("#equal").on("click", function(){
 		equation += input;
-		var final = eval(equation);
-		
-		$("#input").text(final);
-		$("#equation").text(final);
-		equation = final;
+		//Plus sign drops extra zeros
+		answer = +eval(equation).toFixed(2);		
+		$("#input").text(answer);
+		$("#equation").text(answer);
+		equation = answer;
 		reset();
 		input = "";
 		
