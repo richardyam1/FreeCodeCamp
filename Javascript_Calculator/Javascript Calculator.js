@@ -1,16 +1,15 @@
 $(document).ready(function(){
 
 	var input = "";
-	var first_number = 0;
 	var equation = "";
 	var decimal = false;
 	var max = 1;
-	var math_sign = false;
+	var math_sign = true;
 	var answer = 0;
 	function reset(){
 		input = 0;
 		max = 1;
-		math_sign = false;
+		math_sign = true;
 		decimal = false;
 	}
 	$("#input").text(0);
@@ -24,14 +23,18 @@ $(document).ready(function(){
 				input += $(this).attr('id');
 				max ++;
 			}
-		
+			//Starts equation over if number is pressed after equal key
+			if(equation === answer && math_sign === false){
+				equation = "";
+			}
+			equation += $(this).attr('id');
 			$("#input").text(input);
+			$("#equation").text(equation);
+			math_sign = false;
 		}
 	});
 
-	$("#clear_all").on("click", function(){
-		
-	 	first_number = 0;
+	$("#clear_all").on("click", function(){	 	
 	 	equation = "";
 	 	reset();
 		$("#input").text(0);
@@ -40,6 +43,7 @@ $(document).ready(function(){
 
 	$("#clear_input").on("click", function(){
 		 reset();
+		 math_sign = false;
 		$("#input").text(0);
 	});
 
@@ -59,14 +63,8 @@ $(document).ready(function(){
 		}
 	});
 	$("#plus").on("click", function(){		
-		if (math_sign === false){
-			if (first_number == 0){
-				first_number = input;
-			}
-			else{
-				first_number += input;
-			}
-			equation += (input + " + ");
+		if (math_sign === false){			
+			equation += ( " + ");
 			$("#input").text("+");
 			$("#equation").text(equation);
 			reset();
@@ -74,14 +72,8 @@ $(document).ready(function(){
 	});
 
 	$("#minus").on("click", function(){	
-		if(math_sign === false){
-			if (first_number == 0){
-				first_number = input;
-			}
-			else{
-				first_number -= input;
-			}
-			equation += (input + " - ");
+		if(math_sign === false){	
+			equation += (" - ");
 			$("#input").text("-");
 			$("#equation").text(equation);
 			reset();		
@@ -90,13 +82,8 @@ $(document).ready(function(){
 
 	$("#multiply").on("click", function(){
 		if(math_sign == false){
-			if (first_number == 0){
-				first_number = input;
-			}
-			else{
-				first_number *= input;
-			}		
-			equation += (input + " * ");
+					
+			equation += (" * ");
 			$("#input").text("*");
 			$("#equation").text(equation);
 			reset();
@@ -104,14 +91,8 @@ $(document).ready(function(){
 	});
 
 	$("#divide").on("click", function(){	
-		if(math_sign === false){
-			if (first_number == 0){
-				first_number = input;
-			}
-			else{
-				first_number = first_number/input;
-			}	
-			equation += (input + " / ");
+		if(math_sign === false){			
+			equation += (" / ");
 			$("#input").text("/");
 			$("#equation").text(equation);
 			reset();
@@ -120,7 +101,6 @@ $(document).ready(function(){
 	});
 
 	$("#equal").on("click", function(){
-		equation += input;
 		//Plus sign drops extra zeros
 		answer = +eval(equation).toFixed(2);		
 		$("#input").text(answer);
@@ -128,6 +108,7 @@ $(document).ready(function(){
 		equation = answer;
 		reset();
 		input = "";
+		math_sign = false;
 		
 	});
 
