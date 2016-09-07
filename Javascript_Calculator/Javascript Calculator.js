@@ -44,7 +44,9 @@ $(document).ready(function(){
 	$("#clear_input").on("click", function(){
 		 reset();
 		 math_sign = false;
+		equation.slice(-1);
 		$("#input").text(0);
+		$("equation").text(equation);
 	});
 
 	$(".zero").on("click", function(){
@@ -63,7 +65,8 @@ $(document).ready(function(){
 		}
 	});
 	$("#plus").on("click", function(){		
-		if (math_sign === false){			
+		if (math_sign === false){	
+			equation = +eval(equation).toFixed(2);		
 			equation += ( " + ");
 			$("#input").text("+");
 			$("#equation").text(equation);
@@ -73,6 +76,7 @@ $(document).ready(function(){
 
 	$("#minus").on("click", function(){	
 		if(math_sign === false){	
+			equation = +eval(equation).toFixed(2);		
 			equation += (" - ");
 			$("#input").text("-");
 			$("#equation").text(equation);
@@ -82,7 +86,7 @@ $(document).ready(function(){
 
 	$("#multiply").on("click", function(){
 		if(math_sign == false){
-					
+			equation = +eval(equation).toFixed(2);		
 			equation += (" * ");
 			$("#input").text("*");
 			$("#equation").text(equation);
@@ -91,7 +95,8 @@ $(document).ready(function(){
 	});
 
 	$("#divide").on("click", function(){	
-		if(math_sign === false){			
+		if(math_sign === false){	
+			equation = +eval(equation).toFixed(2);		
 			equation += (" / ");
 			$("#input").text("/");
 			$("#equation").text(equation);
