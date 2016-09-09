@@ -1,6 +1,6 @@
 $(document).ready(function(){
-
-	var input = "";
+	//Task: Make clear button clear last element of equation
+	var input = 0;
 	var equation = "";
 	var decimal = false;
 	var max = 1;
@@ -13,7 +13,6 @@ $(document).ready(function(){
 		decimal = false;
 	}
 	$("#input").text(0);
-	$("#equation").text(0);
 	$(".number").on("click",  function(){
 		if (max < 8){
 			if(input === 0) {
@@ -27,7 +26,7 @@ $(document).ready(function(){
 			if(equation === answer && math_sign === false){
 				equation = "";
 			}
-			equation += $(this).attr('id');
+	
 			$("#input").text(input);
 			$("#equation").text(equation);
 			math_sign = false;
@@ -38,21 +37,22 @@ $(document).ready(function(){
 	 	equation = "";
 	 	reset();
 		$("#input").text(0);
-		$("#equation").text(0);
+		$("#equation").text("");
 	});
 
 	$("#clear_input").on("click", function(){
 		 reset();
 		 math_sign = false;
-		equation.slice(-1);
 		$("#input").text(0);
 		$("equation").text(equation);
 	});
 
 	$(".zero").on("click", function(){
-		if (input != 0 && max < 8){
+		if (max < 8){
 		input += 0;
+		equation += 0;
 		$("#input").text(input);
+		$("#equation").text(equation);
 		max++;
 	   }
 	});
@@ -60,12 +60,15 @@ $(document).ready(function(){
 	$("#decimal").on("click", function(){
 		if (decimal == false  && max < 8){
 			input += ".";
+			equation += ".";
 			$("#input").text(input);
+			$("#equation").text(equation);
 			decimal = true;
 		}
 	});
 	$("#plus").on("click", function(){		
-		if (math_sign === false){	
+		if (math_sign === false){
+			equation += input;	
 			equation = +eval(equation).toFixed(2);		
 			equation += ( " + ");
 			$("#input").text("+");
@@ -76,6 +79,7 @@ $(document).ready(function(){
 
 	$("#minus").on("click", function(){	
 		if(math_sign === false){	
+			equation += input;
 			equation = +eval(equation).toFixed(2);		
 			equation += (" - ");
 			$("#input").text("-");
@@ -86,6 +90,7 @@ $(document).ready(function(){
 
 	$("#multiply").on("click", function(){
 		if(math_sign == false){
+			equation += input;
 			equation = +eval(equation).toFixed(2);		
 			equation += (" * ");
 			$("#input").text("*");
@@ -96,6 +101,7 @@ $(document).ready(function(){
 
 	$("#divide").on("click", function(){	
 		if(math_sign === false){	
+			equation += input;
 			equation = +eval(equation).toFixed(2);		
 			equation += (" / ");
 			$("#input").text("/");
@@ -107,6 +113,7 @@ $(document).ready(function(){
 
 	$("#equal").on("click", function(){
 		//Plus sign drops extra zeros
+		equation += input;
 		answer = +eval(equation).toFixed(2);		
 		$("#input").text(answer);
 		$("#equation").text(answer);
