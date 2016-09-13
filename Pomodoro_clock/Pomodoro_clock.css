@@ -1,0 +1,27 @@
+body{
+	background-color: grey;
+}
+
+h1{
+	text-align: center;
+	
+}
+
+#break_time{
+	float:left;
+	width: 50%;
+	text-align: center;
+	font-size: 50px;
+}
+
+#work_time{
+	float: right;
+	width: 50%;
+	text-align: center;
+	font-size: 50px;
+}
+
+#minute_change{
+	width: 50%;
+	margin: 0 auto;
+}
