@@ -33,3 +33,19 @@ h1{
   width: 100px;
   font-size: 20px
 }
+
+#clock{
+	text-align: center;
+}
+
+.timer{
+	width: 300px;
+	height: 300px;
+	border-radius: 50%;
+	background: none;
+	border: solid;
+	margin-top: 10px;
+	font-size: 50px;
+
+}
+

@@ -3,8 +3,8 @@ $(document).ready(function(){
   var work_time = 25;
   $("#break_minute").text(break_time);
   $("#work_minute").text(work_time);
-  
-  
+  $(".timer").text(work_time);
+
   $("#minus_break").on("click",function(){
     if(break_time > 1){
       break_time--;
@@ -23,6 +23,8 @@ $(document).ready(function(){
       if(work_time > 1){
         work_time--;
         $("#work_minute").text(work_time);
+        $(".timer").text(work_time);
+
       }
     });
     
@@ -30,9 +32,10 @@ $(document).ready(function(){
       if(work_time < 40){
         work_time++;
         $("#work_minute").text(work_time);
+        $(".timer").text(work_time);
+
       }
     });
-    
     
   });
   
