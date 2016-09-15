@@ -1,5 +1,5 @@
-body{
-	background-color: grey;
+body {
+	background-color: #A3D826;
 }
 
 h1{
@@ -23,7 +23,7 @@ h1{
 
 #minute_change{
 	width: 50%;
-	margin: 0 auto;
+	margin-left: 42%;
 }
 
 .time_modify{
