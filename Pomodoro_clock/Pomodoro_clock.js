@@ -1,6 +1,6 @@
 $(document).ready(function(){
   var break_minute = 5;
-  var work_minute = 25;
+  var work_minute = 1;
   //Set to 5 for testing purposes
   var seconds = 0;
   var paused = true;
@@ -49,92 +49,39 @@ $(document).ready(function(){
        else if(paused === false){
         paused = true;
        }
-       /*
-       if(break_time === true){
-         var break_countdown = setInterval(function(){
-            if(break_minute > 0 && seconds === -1){
-              seconds = 5;
-              break_minute--;
-            }
-            if(seconds < 10){
-              seconds = '0' + seconds;
-            }
-
-            else if(break_minute === 0 && seconds === 0){
-              break_time = false;
-              work_countdown();
-            }
-
-            $(".timer").html("Pause Session" + "<br>" + "<br>" + (break_minute )  + ":" + seconds);
-            seconds--;
-            
-            if(paused === true){
-              $(".timer").html("Resume Session" + "<br>" + "<br>" + (break_minute)  + ":" + seconds);
-
-              clearInterval(break_countdown);
-            }
-          },1000);
-       }
-       });
-      if(break_time === false){
-        var work_countdown = setInterval(function() {
-          if(work_minute > 0 && seconds === -1){
-            //Set to 5 for testing purposes
-            seconds = 5;
-            work_minute--;
-          }
-          if(seconds < 10){
-            seconds = '0' + seconds;
-          }
-
-          else if(work_minute === 0 && seconds === 0){
-            break_time = true;
-            break_countdown();
-          }
-          $(".timer").html("Pause Session" + "<br>" + "<br>" + (work_minute )  + ":" + seconds);
-          seconds--;
-          
-          if(paused === true){
-            $(".timer").html("Resume Session" + "<br>" + "<br>" + (work_minute )  + ":" + seconds);
-
-            clearInterval(work_countdown);
-          }
-
-        }, 1000);
-      }*/
+       
 
       var count_down = setInterval(function(){
         if(break_time === false){
-          if(work_minute === 0 && seconds === 0){
+          if(seconds < 10){
+            seconds = '0' + seconds;
+          }
+          if(paused === true){
+            $(".timer").html("Resume Session" + "<br>" + "<br>" + (work_minute )  + ":" + seconds);
+
+            clearInterval(countdown);
+          }
+          else{
+          $(".timer").html("Pause Session" + "<br>" + "<br>" + (work_minute )  + ":" + seconds);
+          seconds--;
+          }
+          
+
+          if(work_minute === 0 && seconds === -1){
             break_time = true;
+            seconds = 5;
           }
 
-          else if(work_minute > 0 && seconds === -1){
+          else if(work_minute > -1 && seconds === -1){
             //Set to 5 for testing purposes
             seconds = 5;
             work_minute--;
           }
-          if(seconds < 10){
-            seconds = '0' + seconds;
-          }
-
-          $(".timer").html("Pause Session" + "<br>" + "<br>" + (work_minute )  + ":" + seconds);
-          seconds--;
           
-          if(paused === true){
-            $(".timer").html("Resume Session" + "<br>" + "<br>" + (work_minute )  + ":" + seconds);
 
-            clearInterval(work_countdown);
-          }
+         
+        }
         else if(break_time === true){
-          if(break_minute === 0 && seconds === 0){
-              break_time = false;
-            }
-
-          else if(break_minute > 0 && seconds === -1){
-              seconds = 5;
-              break_minute--;
-            }
             if(seconds < 10){
               seconds = '0' + seconds;
             }
@@ -146,10 +93,20 @@ $(document).ready(function(){
             if(paused === true){
               $(".timer").html("Resume Break" + "<br>" + "<br>" + (break_minute)  + ":" + seconds);
 
-              clearInterval(break_countdown);
+              clearInterval(countdown);
             }
+          if(break_minute === 0 && seconds === -1){
+              break_time = false;
+              seconds = 5;
+            }
+
+          else if(break_minute > -1 && seconds === -1){
+              seconds = 5;
+              break_minute--;
+            }
+            
         }
-        }
+        
       },1000);
         
     });
