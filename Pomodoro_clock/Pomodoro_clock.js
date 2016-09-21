@@ -1,10 +1,11 @@
 $(document).ready(function(){
   var break_minute = 5;
   var work_minute = 1;
+ 
   //Set to 5 for testing purposes
-  var seconds = 0;
+  var seconds = 5;
   var paused = true;
-  var break_time = false;
+  var rest_time = false;
   $("#break_minute").text(break_minute);
   $("#work_minute").text(work_minute);
   $(".timer").html("Start Session" + "<br>" + "<br>" + work_minute);
@@ -49,60 +50,67 @@ $(document).ready(function(){
        else if(paused === false){
         paused = true;
        }
-       
+       //Stores initial minutes to reset to during transition
+       var break_down = break_minute;
+       var work_down = work_minute;
 
       var count_down = setInterval(function(){
-        if(break_time === false){
-          if(seconds < 10){
-            seconds = '0' + seconds;
+        if(rest_time === false){
+          
+          
+          if (paused === false){
+            if(seconds < 10){
+              seconds = '0' + seconds;
+            }
+            $(".timer").html("Pause Session" + "<br>" + "<br>" + (work_down )  + ":" + seconds);
+            seconds--;
+            }
+          else if(paused === true){
+            if(seconds < 10){
+              seconds = '0' + seconds;
           }
-          if(paused === true){
-            $(".timer").html("Resume Session" + "<br>" + "<br>" + (work_minute )  + ":" + seconds);
+            $(".timer").html("Resume Session" + "<br>" + "<br>" + (work_down )  + ":" + seconds);
 
             clearInterval(countdown);
           }
-          else{
-          $(".timer").html("Pause Session" + "<br>" + "<br>" + (work_minute )  + ":" + seconds);
-          seconds--;
-          }
-          
 
-          if(work_minute === 0 && seconds === -1){
-            break_time = true;
+          if(work_down === 0 && seconds === -1){
+            rest_time = true;
+            work_down = work_minute;
             seconds = 5;
           }
 
-          else if(work_minute > -1 && seconds === -1){
+          else if(work_down > -1 && seconds === -1){
             //Set to 5 for testing purposes
             seconds = 5;
-            work_minute--;
+            work_down--;
           }
           
 
          
         }
-        else if(break_time === true){
+        else if(rest_time === true){
             if(seconds < 10){
               seconds = '0' + seconds;
             }
-
-            
-            $(".timer").html("Pause Break" + "<br>" + "<br>" + (break_minute )  + ":" + seconds);
+ 
+            $(".timer").html("Pause Break" + "<br>" + "<br>" + (break_down)  + ":" + seconds);
             seconds--;
             
             if(paused === true){
-              $(".timer").html("Resume Break" + "<br>" + "<br>" + (break_minute)  + ":" + seconds);
+              $(".timer").html("Resume Break" + "<br>" + "<br>" + (break_down)  + ":" + seconds);
 
               clearInterval(countdown);
             }
-          if(break_minute === 0 && seconds === -1){
-              break_time = false;
+          if(break_down === 0 && seconds === -1){
+              rest_time = false;
+              break_down = break_minute;
               seconds = 5;
             }
 
-          else if(break_minute > -1 && seconds === -1){
+          else if(break_down > -1 && seconds === -1){
               seconds = 5;
-              break_minute--;
+              break_down--;
             }
             
         }
