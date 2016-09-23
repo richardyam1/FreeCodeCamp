@@ -55,24 +55,15 @@ $(document).ready(function(){
        var work_down = work_minute;
 
       var count_down = setInterval(function(){
-        if(rest_time === false){
+        if(rest_time === false && paused === false){
           
-          
-          if (paused === false){
             if(seconds < 10){
               seconds = '0' + seconds;
             }
             $(".timer").html("Pause Session" + "<br>" + "<br>" + (work_down )  + ":" + seconds);
             seconds--;
-            }
-          else if(paused === true){
-            if(seconds < 10){
-              seconds = '0' + seconds;
-          }
-            $(".timer").html("Resume Session" + "<br>" + "<br>" + (work_down )  + ":" + seconds);
-
-            clearInterval(countdown);
-          }
+            
+         
 
           if(work_down === 0 && seconds === -1){
             rest_time = true;
@@ -89,7 +80,7 @@ $(document).ready(function(){
 
          
         }
-        else if(rest_time === true){
+        else if(rest_time === true && paused === false){
             if(seconds < 10){
               seconds = '0' + seconds;
             }
@@ -116,7 +107,14 @@ $(document).ready(function(){
         }
         
       },1000);
-        
+        if(paused === true){
+            if(seconds < 10){
+              seconds = '0' + seconds;
+          }
+            $(".timer").html("Resume Session" + "<br>" + "<br>" + (work_down )  + ":" + seconds);
+            seconds = seconds;
+            clearInterval(countdown);
+          }
     });
     
   
