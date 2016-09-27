@@ -1,5 +1,6 @@
 <head>
 	<script src="jquery-3.1.0.min.js"></script>
+	<script src = "jquery-ui.min.js"></script>
 	<link rel = "stylesheet" href="Pomodoro_clock.css" type="text/css">
 	<script type="text/javascript" src="Pomodoro_clock.js"></script>
 	 <meta charset="utf-8"> 
@@ -10,7 +11,7 @@
 <div class = "container-fluid">
 	<h1>Let's get Productive!</h1>
 	<div id = "time_set">
-		<div id = "break_time">Break Time
+		<div id = "break_time">Break Length
 			<div id = "minute_change">
 				<button class = "time_modify" id = "minus_break" style = "float:left; width:10%"> - </button>
 				<div id = "initial_break" style = "float: left; width: 10%">  </div>
@@ -20,7 +21,7 @@
 			</div>
 
 		</div>
-		<div id = "work_time"> Work Time
+		<div id = "work_time"> Work Length
 			<div id = "minute_change">
 				<button class = "time_modify" id = "minus_work" style = "float:left; width:10%"> - </button>
 				<div id = "initial_work" style = "float: left; width: 10%">  </div>
@@ -42,4 +43,5 @@
 
 		</button>
 	</div>
+	<button class = "reset">Reset</button>
 </div>
