@@ -39,13 +39,23 @@ h1{
 }
 
 .timer{
-	width: 500px;
-	height: 500px;
+	width: 400px;
+	height: 400px;
 	border-radius: 50%;
 	background: none;
 	border: solid;
 	margin-top: 10px;
 	font-size: 50px;
 
+}
+
+.reset{
+	background: none;
+	width: auto;
+	font-size: 40px;
+	outline:none;
+	border: 0;
+    margin-left: 47%;	
+    margin-top: 20px;
 }
 
