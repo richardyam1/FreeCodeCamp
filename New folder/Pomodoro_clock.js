@@ -1,9 +1,8 @@
 $(document).ready(function(){
   var initial_break = 5;
   var initial_work = 25;
-  //Store minutes in seperate value so timer can reset to original value when timer fully elapsed
-  var break_minute = 5;
-  var work_minute = 25;
+  var break_minute;
+  var work_minute;
   var seconds = 0;
   //Stops the timer
   var paused=  false;
@@ -59,10 +58,9 @@ $(document).ready(function(){
     
     $(".timer").on("click", function(){
       session = true;
-      //If session is not paused, proceed with countdown
       if(paused === false){
         countdown = setInterval(function(){
-            //Session time
+         
             if(rest_time === false){
               if(seconds < 10){
                 seconds = '0' + seconds;
@@ -80,13 +78,15 @@ $(document).ready(function(){
             }
 
              else if(work_minute > -1 && seconds === -1){
+              //Set to 5 for testing purposes
                seconds = 59;
+
               work_minute--;
 
             }
 
+           
           }
-          //Break time
           else if(rest_time === true){
               if(seconds < 10){
                 seconds = '0' + seconds;
@@ -100,7 +100,7 @@ $(document).ready(function(){
                 rest_time = false;
                 break_minute = initial_break;
                 seconds = 0;
-                $("html body").animate({ backgroundColor: "#74D925" });
+                $("html body").animate({ backgroundColor: "#A3D826" });
                 audio.play();
 
               }
@@ -114,24 +114,22 @@ $(document).ready(function(){
           
         },1000);
   }
-          //When user pauses session
           else{
             $("#session").text("Resume");
              clearInterval(countdown);
       
             }
-            //Paused value changes with each click
             paused = !paused;
 
       });
-  
+
     $(".reset").on("click", function(){
         clearInterval(countdown);
         $("#initial_break").text(initial_break);
         $("#initial_work").text(initial_work);
         $("#session").text("Start Session");
         $("#minute").text(initial_work);
-        $("html body").animate({ backgroundColor: "#74D925" });
+        $("html body").animate({ backgroundColor: "#A3D826" });
         seconds = 0;
         paused=  false;
         rest_time = false;
