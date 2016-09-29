@@ -1,0 +1,23 @@
+body{
+	background-color:#00A4FF;
+}
+
+h1{
+	color:white;
+	font-size: 100px;
+	text-align: center;
+}
+
+#game_board{
+	width: 100%;
+	height: auto;
+	background: none;
+	border:solid;
+	text-align:center;
+}
+
+.squares{
+	width: 500px;
+	height: 500px;
+	border: solid;
+}
