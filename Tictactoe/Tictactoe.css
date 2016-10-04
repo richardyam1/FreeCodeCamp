@@ -34,26 +34,50 @@ h1{
 }
 
 .panel{
+	width: 150px;
+	height: 150px;
+	background-color:black;
+	border:solid;
+	border-color: #FFDA00;
+	position:relative;
+	z-index:2;
+	top:70;
+	left: 50;
+	color: white;
+	font-size: 110px;
+}
 
+.chair{
+	width:200px;
+	height: 70px;
+	background-color: red;
+	position:relative;
+	
+	left: 26px;
+	z-index:1;
 }
 
 .name-plate{
 	width: 200px;
-	height: 50px;
+	height: 45px;
 	background-color:black;
-	margin-top: 70%;
-	margin-left: 25px;
-	z-index: 50px;
+	border:solid;
+	border-color:brown;
+	position:relative;
+	z-index: 3;
+	top: -40px;
+	left:25;
+	color:white;
+	font-size:25px;
 
 }
 
 .floor{
-	width: 500px;
+	width: auto;
 	height: 30px;
 	background-color: #B54B49;
-	margin-top: 88%;
+	position:relative;
+	top:-55px;
+	z-index:2;
 }
 
-.chair{
-
-}
