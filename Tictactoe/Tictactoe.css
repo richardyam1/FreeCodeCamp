@@ -7,6 +7,10 @@ h1{
 	font-size: 100px;
 	text-align: center;
 }
+.restart{
+	font-size: 50px;
+	text-align: center;
+}
 
 #game_board{
 	width: 49%;
