@@ -27,11 +27,15 @@ h1{
 	margin-left: 35%;
 }
 
+.gameButtons{
+	margin-left: 30%;
+	margin-bottom: 20px;
+	margin-top: -40px;
+}
+
 .restart{
 	font-size: 50px;
-	margin-left: 32%;
-	margin-bottom: 10px;
-	margin-top: -60px;
+	margin-left: 25px;
 }
 
 #game_board{
