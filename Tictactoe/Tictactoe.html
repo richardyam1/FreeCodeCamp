@@ -9,8 +9,12 @@
 
 
 <div class = "container-fluid">
-
-	<h1>The Hollywood Squares!</h1>
+		<h1>The Hollywood Squares!</h1>
+		<h2>Player 1, choose which one you want to be<h2>
+	<div id = "selectMark">
+			<button class = "mark" id = "markX"> X </button>
+			<button class = "mark" id = "markO"> O </button>
+	</div>
 	<div class = "gameButtons">
 		<button class = "restart" id = "vsPlayer">Vs.Player2</button>
 		<button class = "restart" id = "clearBoard">Reset</button>
@@ -18,10 +22,14 @@
 	</div>
 	<div class = "contestants" id = "player1">Player 1
 		<div class = "score" id = "score1">	</div>
+		<div class = "playerMark" id = "mark1"></div>
+		<div class = "turnStatus" id = "turn1"> </div>
 	</div>
 
 	<div class = "contestants" id = "player2">Player 2 
 		<div class = "score" id = "score2"></div>
+		<div class = "playerMark" id = "mark2"></div>
+		<div class = "turnStatus" id = "turn2"> </div>
 	</div>
 
 	<div id = "game_board">
