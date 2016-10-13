@@ -38,15 +38,8 @@ $(document).ready(function(){
 		if(document.getElementById(this.id).innerHTML === "" && gameover === false) {
 			if(turn1){
 				$(mark).text(player1);
-
-				//$("#turn1").text("");
+				$("#turn1").text("");
 				$("#turn2").text("Player 2 turn");
-				player1select.push(document.getElementById(this.id).id);
-				if(player1select == winner){
-					$("#turn1").text("Winner");
-					gameover = true;
-				}
-
 			}
 			else{
 				$(mark).text(player2);
@@ -58,6 +51,23 @@ $(document).ready(function(){
 		}
 
 	});
+
+	function gameOver(p1,p2,p3){
+		var s1 = document.getElementById(p1.id).innerHTML;
+		var s2 = document.getElementById(p2.id).innerHTML;
+		var s3 = document.getElementById(p3.id).innerHTML;
+		if(s1 === ""){
+			return false;
+		}
+		if (s1 != s2){
+			return false;
+		}
+		if (s1 != s3){
+			return false;
+		}
+		
+
+	}
 
 	function resetBoard(){
 		for(var i = 0; i <= 9 ; i++){	
