@@ -5,9 +5,11 @@ $(document).ready(function(){
 	var score2 = 0;
 	var player1;
 	var player2;
-	var winner = ["square1", "square2", "square3"];
-	var player1select = [];
-	var player2select = [];
+	var winner = [
+		[1,2,3],
+		[4,5,6]
+	];
+	
 	var captureSquare = new Audio("http://www.qwizx.com/gssfx/usa/hs-ding.wav");
 
 	$("#score1").text(score1);
@@ -34,48 +36,58 @@ $(document).ready(function(){
 	});
 
 	$(".panel").click(function(){
-		var mark = "#" + document.getElementById(this.id).id;
-		if(document.getElementById(this.id).innerHTML === "" && gameover === false) {
+		if($(this).data("filled") !== true && gameover === false) {
 			if(turn1){
-				$(mark).text(player1);
+				if(player1 === "X"){
+					$(this).addClass("x-play");
+					$(this).data("mark", "X");
+				}
+				else if(player1 === "O"){
+					$(this).addClass("o-play");
+					$(this).data("mark", "O");
+				}
 				$("#turn1").text("");
 				$("#turn2").text("Player 2 turn");
+				$(this).data("filled", true);
 			}
 			else{
-				$(mark).text(player2);
+				if(player2 === "X"){
+					$(this).addClass("x-play");
+					$(this).data("mark", "X");
+				}
+				else if(player2 === "O"){
+					$(this).addClass("o-play");
+					$(this).data("mark", "O");
+				}
 				$("#turn1").text("Player 1 turn");
 				$("#turn2").text("");
+				$(this).data("filled", true);
+
 			}
 			captureSquare.play();
 			turn1 = !turn1;
-		}
 
 	});
-
 	function gameOver(p1,p2,p3){
-		var s1 = document.getElementById(p1.id).innerHTML;
-		var s2 = document.getElementById(p2.id).innerHTML;
-		var s3 = document.getElementById(p3.id).innerHTML;
-		if(s1 === ""){
-			return false;
-		}
-		if (s1 != s2){
-			return false;
-		}
-		if (s1 != s3){
-			return false;
+		if($(".panel[data-square='"+p1+"']").data("mark") ===$(".panel[data-square='"+p2+"']").data("mark")  && 
+			$(".panel[data-square='"+p1+"']").data("mark") ===$(".panel[data-square='"+p3+"']").data("mark") ){
+			$("#turn2").text("test");
 		}
 		
 
 	}
+/*
+	function winGame(){
+		var win = gameOver(winner[0][0], winner[0][1], winner[0][2]);
 
+	}
+*/
 	function resetBoard(){
-		for(var i = 0; i <= 9 ; i++){	
-			var test = document.getElementsByClassName("panel");
-			test[i].innerHTML = "";
-		}
+		$(".panel").removeClass('x-play');
+		$(".panel").removeClass('o-play');
+		$(".panel").data("filled", "");
 		turn1 = true;
-		$("#turn1").text("");
+		$("#turn1").text("Player 1 turn");
 		$("#turn2").text("");
 
 	}
