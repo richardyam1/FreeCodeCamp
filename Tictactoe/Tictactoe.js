@@ -66,22 +66,36 @@ $(document).ready(function(){
 			}
 			captureSquare.play();
 			turn1 = !turn1;
+			checkGame();
+		}
 
 	});
 	function gameOver(p1,p2,p3){
-		if($(".panel[data-square='"+p1+"']").data("mark") ===$(".panel[data-square='"+p2+"']").data("mark")  && 
-			$(".panel[data-square='"+p1+"']").data("mark") ===$(".panel[data-square='"+p3+"']").data("mark") ){
-			$("#turn2").text("test");
+		if(($(".panel[data-square='"+p1+"']").data("mark") ===$(".panel[data-square='"+p2+"']").data("mark") && $(".panel[data-square='"+p1+"']").data("mark") ===$(".panel[data-square='"+p3+"']").data("mark"))
+			&& $(".panel[data-square='"+p1+"']").data("filled") === true && $(".panel[data-square='"+p2+"']").data("filled") === true && $(".panel[data-square='"+p3+"']").data("filled") === true)
+		{
+			return true;
+
+		}
+		else{
+			return false;
 		}
 		
 
 	}
-/*
-	function winGame(){
-		var win = gameOver(winner[0][0], winner[0][1], winner[0][2]);
+
+	function checkGame(){
+		for(var i = 0; i < winner.length; i++){
+			var win = gameOver(winner[i][0], winner[i][1], winner[i][2]);
+			if (win){
+				alert("test");
+				resetBoard();
+			}
+		}
+
 
 	}
-*/
+
 	function resetBoard(){
 		$(".panel").removeClass('x-play');
 		$(".panel").removeClass('o-play');
