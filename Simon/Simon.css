@@ -1,0 +1,16 @@
+#game_board{
+	margin: 0 auto;
+	margin-top: 10%;
+	height: 500px;
+	width:500px;
+	background-color: #303030;
+	border-radius: 50%;
+}
+
+#center_label{
+	margin: 0 auto;
+	height: 200px;
+	width: 200px;
+	border-radius: 50%;
+	background-color: grey;
+}
