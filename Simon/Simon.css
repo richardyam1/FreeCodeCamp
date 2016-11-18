@@ -1,3 +1,8 @@
+@font-face{
+  font-family: name;
+  src: url(https://fonts.gstatic.com/s/alfaslabone/v5/Qx6FPcitRwTC_k88tLPc-TxObtw73-qQgbr7Be51v5c.woff2) ;
+}
+
 .container-fluid{
    position: relative;
   width:640px;
@@ -23,6 +28,27 @@
     border:15px solid black;
     border-radius: 50%;
     z-index: 10;
+
+}
+
+h1{
+  margin-left: 45px;
+  margin-top: 80px;
+  font-size: 60px;
+  font-family: name;
+}
+
+#roundNumber{
+  float:left;
+  margin-left: 100px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+}
+
+#switch{
+  margin-left : 20px;
+  float:left;
 
 }
 
