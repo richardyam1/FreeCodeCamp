@@ -1,16 +1,62 @@
-#game_board{
-	margin: 0 auto;
-	margin-top: 10%;
-	height: 500px;
-	width:500px;
-	background-color: #303030;
-	border-radius: 50%;
+.container-fluid{
+   position: relative;
+  width:640px;
+  margin:0 auto;
 }
 
-#center_label{
-	margin: 0 auto;
-	height: 200px;
-	width: 200px;
-	border-radius: 50%;
-	background-color: grey;
+#simon{
+	position: absolute;
+  top:170px;
+  width:640px;
+  height: 640px;
+  z-index:0;
+  background-color: #000;
+  border-radius: 310px;
 }
+#center_label{
+  	background-color:silver;
+    top: 23%; 
+    left:22.8%; 
+    width:50%; 
+    height:50%; 
+    position: absolute;
+    border:15px solid black;
+    border-radius: 50%;
+    z-index: 10;
+
+}
+
+.pad{
+  width: 300px;
+  height: 300px;
+  float: left;
+  z-index: 1;
+  margin: 10px;
+  opacity: 0.6;
+}
+
+#green{
+  border-top-left-radius: 300px;
+  background-color: green;
+}
+
+#red{
+   float: left;
+  border-top-right-radius: 300px;
+  background-color: red;
+  clear: right;
+}
+
+#yellow{
+  float: left;
+  border-bottom-left-radius: 300px;
+  background-color: yellow;
+  clear: left;
+}
+
+#blue{
+  float: left;
+  border-bottom-right-radius: 300px;
+  background-color: blue;
+}
+
