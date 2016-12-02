@@ -7,34 +7,70 @@ $(document).ready(function(){
 	var yellowSound = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound3.mp3");
 	var blueSound = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3");
 	var round = 1;
+	var cpuSequence = ["green", "red", "yellow", "blue"];
+	var userSequence = [];
 	
 		$("#green").click(function(){
-			greenSound.play();
-			document.getElementById("green").style.backgroundColor = "#2BFF4D";
 			lightUp("green");
 		});
 
 		$("#red").click(function(){
-			redSound.play();
-			document.getElementById("red").style.backgroundColor = "#7F0000";
 			lightUp("red");
 		});
 
 		$("#yellow").click(function(){
-			yellowSound.play();
-			document.getElementById("yellow").style.backgroundColor= "#E9E080";
 			lightUp("yellow");
-
 		});
 
 		$("#blue").click(function(){
-			blueSound.play();
-			document.getElementById("blue").style.backgroundColor = "#5D72FF";
 			lightUp("blue");
 		});
 
+	function cpuPick(){
+		var select = Math.floor((Math.random() * 10) + 1);
+		switch(select){
+			case 1:
+				cpuSequence.push();
+				break;
+			case 2:
+				cpuSequence.push();
+				break;
+			case 3:
+				cpuSequence.push();
+				break;
+			case 4:
+				cpuSequence.push();
+				break;
 
+		}
+
+	}
+	for(var i = 0; i < cpuSequence.length; i++){
+		setTimeout(function(){
+			lightUp(cpuSequence[i]);
+		}, 500);
+	}
 	function lightUp(color){
+		switch(color){
+			case "green":
+				greenSound.play();
+				document.getElementById("green").style.backgroundColor = "#2BFF4D";
+				break;
+			case "red":
+				redSound.play();
+				document.getElementById("red").style.backgroundColor = "#7F0000";
+				break;
+			case "yellow":
+				yellowSound.play();
+				document.getElementById("yellow").style.backgroundColor= "#E9E0A6";
+				break;
+			case "blue":
+				blueSound.play();
+				document.getElementById("blue").style.backgroundColor = "#5D72FF";
+				break;
+
+		}
+
 		setTimeout(function(){
 			document.getElementById(color).style.backgroundColor = color;
 		},400);
