@@ -9,47 +9,59 @@ $(document).ready(function(){
 	var round = 1;
 	var cpuSequence = ["green", "red", "yellow", "blue"];
 	var userSequence = [];
-	
+	var i = 0;
+	var interval;
+
 		$("#green").click(function(){
 			lightUp("green");
+			userSequence.push("green");
 		});
 
 		$("#red").click(function(){
 			lightUp("red");
+			userSequence.push("red");
 		});
 
 		$("#yellow").click(function(){
 			lightUp("yellow");
+			userSequence.push("yellow");
 		});
 
 		$("#blue").click(function(){
 			lightUp("blue");
+			userSequence.push("blue");
 		});
 
 	function cpuPick(){
-		var select = Math.floor((Math.random() * 10) + 1);
+		var select = Math.floor((Math.random() * 4) + 1);
 		switch(select){
 			case 1:
-				cpuSequence.push();
+				cpuSequence.push("green");
 				break;
 			case 2:
-				cpuSequence.push();
+				cpuSequence.push("red");
 				break;
 			case 3:
-				cpuSequence.push();
+				cpuSequence.push("yellow");
 				break;
 			case 4:
-				cpuSequence.push();
+				cpuSequence.push("blue");
 				break;
-
 		}
+	}
 
+	function playSequence(){
+		interval = setInterval(function(){
+			if(i < cpuSequence.length){
+				lightUp(cpuSequence[i]);
+				i++;
+			}
+			else{
+				clearInterval(interval);
+			}
+		}, 1000);
 	}
-	for(var i = 0; i < cpuSequence.length; i++){
-		setTimeout(function(){
-			lightUp(cpuSequence[i]);
-		}, 500);
-	}
+
 	function lightUp(color){
 		switch(color){
 			case "green":
@@ -97,6 +109,8 @@ $(document).ready(function(){
 			document.getElementById("start").style.backgroundColor = "green";
 			start = true;
 			$("#roundNumber").text(round);
+			cpuPick();
+			playSequence();
 		}
 		else if(start === true && on === true){
 			document.getElementById("start").style.backgroundColor = "red";
