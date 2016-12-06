@@ -6,31 +6,41 @@ $(document).ready(function(){
 	var redSound = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound2.mp3");
 	var yellowSound = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound3.mp3");
 	var blueSound = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3");
+	var captureSquare = new Audio("http://www.qwizx.com/gssfx/usa/hs-ding.wav");
+
 	var round = 1;
-	var cpuSequence = ["green", "red", "yellow", "blue"];
+	var playerTurn = false;
+	var cpuSequence = ["green", "red"];
 	var userSequence = [];
-	var i = 0;
+	var cpuCount = 0;
+	var playerCount = 0;
 	var interval;
 
+	
 		$("#green").click(function(){
 			lightUp("green");
 			userSequence.push("green");
+			checkMatch();
 		});
 
 		$("#red").click(function(){
 			lightUp("red");
 			userSequence.push("red");
+			checkMatch();
 		});
 
 		$("#yellow").click(function(){
 			lightUp("yellow");
 			userSequence.push("yellow");
+			checkMatch();
 		});
 
 		$("#blue").click(function(){
 			lightUp("blue");
 			userSequence.push("blue");
+			checkMatch();
 		});
+
 
 	function cpuPick(){
 		var select = Math.floor((Math.random() * 4) + 1);
@@ -52,14 +62,38 @@ $(document).ready(function(){
 
 	function playSequence(){
 		interval = setInterval(function(){
-			if(i < cpuSequence.length){
-				lightUp(cpuSequence[i]);
-				i++;
+			if(cpuCount < cpuSequence.length){
+				lightUp(cpuSequence[cpuCount]);
+				cpuCount++;
 			}
 			else{
 				clearInterval(interval);
+				playerTurn = true;
+				cpuCount = 0;
 			}
 		}, 1000);
+	}
+
+	function checkMatch(){
+		if(userSequence[playerCount] !== cpuSequence[playerCount]){
+			captureSquare.play();
+			$("#roundNumber").html("XX");
+			setTimeout(function(){
+				$("#roundNumber").html(round);
+				playSequence();
+
+			}, 1000);
+			playerCount = 0;
+		}
+		else if(userSequence[playerCount] === cpuSequence[playerCount]){
+			playerCount++;
+		}
+
+		if(playerCount === cpuSequence.length + 1){
+				playerCount = 0;
+				cpuPick();
+				playSequence();
+		}
 	}
 
 	function lightUp(color){
@@ -100,6 +134,9 @@ $(document).ready(function(){
 			start = false;
 			strict = false;
 			on = false;
+			cpuSequence = [];
+			userSequence = [];
+			cpuCount = 0;
 			$("#roundNumber").text("--");
 		}
 	});
