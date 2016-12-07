@@ -7,7 +7,6 @@ $(document).ready(function(){
 	var yellowSound = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound3.mp3");
 	var blueSound = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3");
 	var captureSquare = new Audio("http://www.qwizx.com/gssfx/usa/hs-ding.wav");
-
 	var round = 1;
 	var playerTurn = false;
 	var cpuSequence = [];
@@ -15,32 +14,40 @@ $(document).ready(function(){
 	var cpuCount = 0;
 	var playerCount = 0;
 	var interval;
+	var score = 0;
+	$("#green").click(function(){
 		if(playerTurn === true){
-			$("#green").click(function(){
-				lightUp("green");
-				playerSequence.push("green");
-				checkMatch();
-			});
-
-			$("#red").click(function(){
-				lightUp("red");
-				playerSequence.push("red");
-				checkMatch();
-			});
-
-			$("#yellow").click(function(){
-				lightUp("yellow");
-				playerSequence.push("yellow");
-				checkMatch();
-			});
-
-			$("#blue").click(function(){
-				lightUp("blue");
-				playerSequence.push("blue");
-				checkMatch();
-			});
+			lightUp("green");
+			playerSequence.push("green");
+			checkMatch();
 		}
-	
+	});
+
+	$("#red").click(function(){
+		if(playerTurn === true){
+			lightUp("red");
+			playerSequence.push("red");
+			checkMatch();
+		}
+	});
+
+	$("#yellow").click(function(){
+		if(playerTurn === true){
+			lightUp("yellow");
+			playerSequence.push("yellow");
+			checkMatch();
+		}
+	});
+
+	$("#blue").click(function(){
+		if(playerTurn === true){
+			lightUp("blue");
+			playerSequence.push("blue");
+			checkMatch();
+		}
+	});
+		
+
 
 
 	function cpuPick(){
@@ -81,23 +88,39 @@ $(document).ready(function(){
 			$("#roundNumber").html("XX");
 			setTimeout(function(){
 				$("#roundNumber").html(round);
-				playSequence();
+				if(strict === false){
+					playSequence();
+				}
+				else if(strict === true){
+					round = 0;
+					$("#roundNumber").text(round);
+					cpuSequence = [];
+					cpuPick();
+					playSequence();
+				}
 
 			}, 1000);
 			playerCount = 0;
 			playerSequence = [];
+			playerTurn = false;
 		}
 		else if(playerSequence[playerCount] === cpuSequence[playerCount]){
 			playerCount++;
 		}
 
 		if(playerCount === cpuSequence.length){
-				playerCount = 0;
+				playerCount = 1;
 				playerSequence = [];
 				cpuPick();
 				playSequence();
 				round++;
 				$("#roundNumber").html(round);
+				if(score === 3){
+					alert("You win!");
+				}
+				else{
+					score++;
+				}
 		}
 	}
 
@@ -143,7 +166,6 @@ $(document).ready(function(){
 			playerSequence = [];
 			cpuCount = 0;
 			playerCount = 0;
-
 			$("#roundNumber").text("--");
 		}
 	});
