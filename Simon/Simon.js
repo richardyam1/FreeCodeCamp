@@ -10,36 +10,37 @@ $(document).ready(function(){
 
 	var round = 1;
 	var playerTurn = false;
-	var cpuSequence = ["green", "red"];
-	var userSequence = [];
+	var cpuSequence = [];
+	var playerSequence = [];
 	var cpuCount = 0;
 	var playerCount = 0;
 	var interval;
+		if(playerTurn === true){
+			$("#green").click(function(){
+				lightUp("green");
+				playerSequence.push("green");
+				checkMatch();
+			});
 
+			$("#red").click(function(){
+				lightUp("red");
+				playerSequence.push("red");
+				checkMatch();
+			});
+
+			$("#yellow").click(function(){
+				lightUp("yellow");
+				playerSequence.push("yellow");
+				checkMatch();
+			});
+
+			$("#blue").click(function(){
+				lightUp("blue");
+				playerSequence.push("blue");
+				checkMatch();
+			});
+		}
 	
-		$("#green").click(function(){
-			lightUp("green");
-			userSequence.push("green");
-			checkMatch();
-		});
-
-		$("#red").click(function(){
-			lightUp("red");
-			userSequence.push("red");
-			checkMatch();
-		});
-
-		$("#yellow").click(function(){
-			lightUp("yellow");
-			userSequence.push("yellow");
-			checkMatch();
-		});
-
-		$("#blue").click(function(){
-			lightUp("blue");
-			userSequence.push("blue");
-			checkMatch();
-		});
 
 
 	function cpuPick(){
@@ -75,7 +76,7 @@ $(document).ready(function(){
 	}
 
 	function checkMatch(){
-		if(userSequence[playerCount] !== cpuSequence[playerCount]){
+		if(playerSequence[playerCount] !== cpuSequence[playerCount]){
 			captureSquare.play();
 			$("#roundNumber").html("XX");
 			setTimeout(function(){
@@ -84,15 +85,19 @@ $(document).ready(function(){
 
 			}, 1000);
 			playerCount = 0;
+			playerSequence = [];
 		}
-		else if(userSequence[playerCount] === cpuSequence[playerCount]){
+		else if(playerSequence[playerCount] === cpuSequence[playerCount]){
 			playerCount++;
 		}
 
-		if(playerCount === cpuSequence.length + 1){
+		if(playerCount === cpuSequence.length){
 				playerCount = 0;
+				playerSequence = [];
 				cpuPick();
 				playSequence();
+				round++;
+				$("#roundNumber").html(round);
 		}
 	}
 
@@ -135,8 +140,10 @@ $(document).ready(function(){
 			strict = false;
 			on = false;
 			cpuSequence = [];
-			userSequence = [];
+			playerSequence = [];
 			cpuCount = 0;
+			playerCount = 0;
+
 			$("#roundNumber").text("--");
 		}
 	});
