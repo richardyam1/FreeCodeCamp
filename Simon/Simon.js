@@ -98,7 +98,6 @@ $(document).ready(function(){
 					cpuPick();
 					playSequence();
 				}
-
 			}, 1000);
 			playerCount = 0;
 			playerSequence = [];
@@ -107,20 +106,24 @@ $(document).ready(function(){
 		else if(playerSequence[playerCount] === cpuSequence[playerCount]){
 			playerCount++;
 		}
-
+		
 		if(playerCount === cpuSequence.length){
-				playerCount = 1;
+				playerCount = 0;
 				playerSequence = [];
-				cpuPick();
-				playSequence();
-				round++;
-				$("#roundNumber").html(round);
+				score++;
 				if(score === 3){
 					alert("You win!");
+					cpuSequence = [];
+					round = 0;
 				}
 				else{
-					score++;
+					round++;
 				}
+				cpuPick();
+				playSequence();
+				$("#roundNumber").html(round);
+				
+				
 		}
 	}
 
