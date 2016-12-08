@@ -112,7 +112,7 @@ $(document).ready(function(){
 				playerCount = 0;
 				playerSequence = [];
 				score++;
-				if(score === 3){
+				if(score === 20){
 					alert("You win!");
 					cpuSequence = [];
 					round = 1;
@@ -125,7 +125,7 @@ $(document).ready(function(){
 					cpuPick();
 					playSequence();
 				},500);
-				
+				playerTurn = false;
 				$("#roundNumber").html(round);
 				
 				
@@ -162,6 +162,8 @@ $(document).ready(function(){
 		if(on === false){
 			document.getElementById("switch").style.marginLeft = "50px";
 			on = true;
+			round = 1;
+			$("#roundNumber").text(round);
 		}
 		else if(on === true){
 			document.getElementById("switch").style.marginLeft = "5px";
