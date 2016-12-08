@@ -92,7 +92,8 @@ $(document).ready(function(){
 					playSequence();
 				}
 				else if(strict === true){
-					round = 0;
+					round = 1;
+					score = 0;
 					$("#roundNumber").text(round);
 					cpuSequence = [];
 					cpuPick();
@@ -114,13 +115,17 @@ $(document).ready(function(){
 				if(score === 3){
 					alert("You win!");
 					cpuSequence = [];
-					round = 0;
+					round = 1;
+					score = 0;
 				}
 				else{
 					round++;
 				}
-				cpuPick();
-				playSequence();
+				setTimeout(function(){
+					cpuPick();
+					playSequence();
+				},500);
+				
 				$("#roundNumber").html(round);
 				
 				
@@ -175,17 +180,37 @@ $(document).ready(function(){
 
 	$("#start").click(function(){
 		if(start === false && on === true){
-			document.getElementById("start").style.backgroundColor = "green";
 			start = true;
 			$("#roundNumber").text(round);
 			cpuPick();
 			playSequence();
 		}
 		else if(start === true && on === true){
-			document.getElementById("start").style.backgroundColor = "red";
-			start = false;
+			cpuSequence = [];
+			playerSequence = [];
+			round = 1;
+			playerCount = 0;
+			score = 0;
+			$("#roundNumber").text("--");
+			setTimeout(function(){
+				cpuPick();
+				playSequence();
+				$("#roundNumber").text(round);
+			}, 1000);
+			
 		}
 	});
+
+	$("#start").mousedown(function(){
+		if(on === true){
+			$(this).css("background", "green");
+		}
+	});
+
+	$("#start").mouseup(function(){
+		$(this).css("background", "red");
+	});
+	
 
 	$("#strict").click(function(){
 		if(strict === false && on === true){
