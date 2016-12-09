@@ -33,7 +33,7 @@
 
 h1{
   margin-left: 45px;
-  margin-top: 80px;
+  margin-top: 60px;
   font-size: 60px;
   font-family: name;
 }
@@ -47,9 +47,8 @@ h1{
   float:left;
   text-align: center;
   color: red;
-  margin-top: -20px;
   font-size: 30px;
-  margin-left: 50px;
+  margin-left: 45px;
   width: 50px;
   height: 30px;
   border: 3px solid black;
@@ -58,7 +57,7 @@ h1{
 }
 
 #roundText{
-  margin-left: 53px;
+  margin-left: 50px;
 }
 
 
@@ -74,8 +73,9 @@ h1{
   background-color: red;
 }
 
+
 #startText{
-  margin-left: 48px;
+  margin-left: 49px;
 }
 
 
@@ -91,13 +91,22 @@ h1{
 }
 
 #strictText{
-  margin-left: 47px;
+  margin-left: 49px;
+}
+
+#strictLight{
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+  margin-left: 90px;
+  border: 3px solid black;
 }
 
 #powerswitch{
   width: 80px;
   height: 30px;
   border: 3px solid black;
+  margin-top: 20px;
   margin-left: 10px;
   display: inline-block;
   background-color: red;
@@ -108,6 +117,7 @@ h1{
   height: 20px;
   border: 3px solid black;
   margin-top: 2px;
+  margin-left: 5px;
   background-color: #DC2422;
 }
 
@@ -130,13 +140,15 @@ h1{
   float: left;
   z-index: 1;
   margin: 10px;
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 #green{
   border-top-left-radius: 300px;
   background-color: green;
 }
+
+
 
 #red{
    float: left;
