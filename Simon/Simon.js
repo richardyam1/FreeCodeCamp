@@ -172,6 +172,7 @@ $(document).ready(function(){
 			start = false;
 			strict = false;
 			on = false;
+			playerTurn = false;
 			cpuSequence = [];
 			playerSequence = [];
 			cpuCount = 0;
@@ -217,10 +218,14 @@ $(document).ready(function(){
 	$("#strict").click(function(){
 		if(strict === false && on === true){
 			document.getElementById("strict").style.backgroundColor = "green";
+			document.getElementById("strictLight").style.backgroundColor = "red";
+
 			strict = true;
 		}
 		else if(strict === true && on === true){
 			document.getElementById("strict").style.backgroundColor = "yellow";
+			document.getElementById("strictLight").style.backgroundColor = "white";
+
 			strict = false;
 		}
 	});
