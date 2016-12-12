@@ -70,6 +70,9 @@ $(document).ready(function(){
 
 	function playSequence(){
 		interval = setInterval(function(){
+			if(on === false){
+				return;
+			}
 			if(cpuCount < cpuSequence.length){
 				lightUp(cpuSequence[cpuCount]);
 				cpuCount++;
@@ -83,6 +86,9 @@ $(document).ready(function(){
 	}
 
 	function checkMatch(){
+		if(on === false){
+			return;
+		}
 		if(playerSequence[playerCount] !== cpuSequence[playerCount]){
 			captureSquare.play();
 			$("#roundNumber").html("XX");
@@ -161,12 +167,14 @@ $(document).ready(function(){
 	$("#powerSwitch").click(function(){
 		if(on === false){
 			document.getElementById("switch").style.marginLeft = "50px";
+			//$("#switch").animate({left: "50px"});
 			on = true;
 			round = 1;
 			$("#roundNumber").text(round);
 		}
 		else if(on === true){
 			document.getElementById("switch").style.marginLeft = "5px";
+			//$("#switch").animate({left: "5px"});
 			document.getElementById("start").style.backgroundColor = "red";
 			document.getElementById("strict").style.backgroundColor = "yellow";
 			start = false;
@@ -177,6 +185,7 @@ $(document).ready(function(){
 			playerSequence = [];
 			cpuCount = 0;
 			playerCount = 0;
+			round = 1;
 			$("#roundNumber").text("--");
 		}
 	});
@@ -230,3 +239,8 @@ $(document).ready(function(){
 		}
 	});
 });
+
+
+/*Issues
+	When it turns off and turns back on, it's still treated like it's player turn
+*/
