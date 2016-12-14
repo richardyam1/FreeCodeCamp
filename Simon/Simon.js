@@ -6,7 +6,8 @@ $(document).ready(function(){
 	var redSound = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound2.mp3");
 	var yellowSound = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound3.mp3");
 	var blueSound = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3");
-	var captureSquare = new Audio("http://www.qwizx.com/gssfx/usa/hs-ding.wav");
+	var error = new Audio("http://soundjax.com/reddo/17604%5Eerror.mp3");
+	var click = new Audio("http://soundjax.com/reddo/36340%5EClick03.mp3");
 	var round = 1;
 	var playerTurn = false;
 	var cpuSequence = [];
@@ -70,27 +71,22 @@ $(document).ready(function(){
 
 	function playSequence(){
 		interval = setInterval(function(){
-			if(on === false){
-				return;
-			}
+			
 			if(cpuCount < cpuSequence.length){
 				lightUp(cpuSequence[cpuCount]);
 				cpuCount++;
 			}
 			else{
-				clearInterval(interval);
 				playerTurn = true;
 				cpuCount = 0;
+				clearInterval(interval);
 			}
 		}, 1000);
 	}
 
-	function checkMatch(){
-		if(on === false){
-			return;
-		}
+	function checkMatch(){	
 		if(playerSequence[playerCount] !== cpuSequence[playerCount]){
-			captureSquare.play();
+			error.play();
 			$("#roundNumber").html("XX");
 			setTimeout(function(){
 				$("#roundNumber").html(round);
@@ -133,31 +129,30 @@ $(document).ready(function(){
 				},500);
 				playerTurn = false;
 				$("#roundNumber").html(round);
-				
-				
 		}
 	}
 
-	function lightUp(color){
-		switch(color){
-			case "green":
-				greenSound.play();
-				document.getElementById("green").style.backgroundColor = "#2BFF4D";
-				break;
-			case "red":
-				redSound.play();
-				document.getElementById("red").style.backgroundColor = "#7F0000";
-				break;
-			case "yellow":
-				yellowSound.play();
-				document.getElementById("yellow").style.backgroundColor= "#E9E0A6";
-				break;
-			case "blue":
-				blueSound.play();
-				document.getElementById("blue").style.backgroundColor = "#5D72FF";
-				break;
+	function lightUp(color){	
+			switch(color){
+				case "green":
+					greenSound.play();
+					document.getElementById("green").style.backgroundColor = "#2BFF4D";
+					break;
+				case "red":
+					redSound.play();
+					document.getElementById("red").style.backgroundColor = "#7F0000";
+					break;
+				case "yellow":
+					yellowSound.play();
+					document.getElementById("yellow").style.backgroundColor= "#E9E0A6";
+					break;
+				case "blue":
+					blueSound.play();
+					document.getElementById("blue").style.backgroundColor = "#5D72FF";
+					break;
 
-		}
+			}
+
 
 		setTimeout(function(){
 			document.getElementById(color).style.backgroundColor = color;
@@ -165,17 +160,15 @@ $(document).ready(function(){
 	}
 
 	$("#powerSwitch").click(function(){
+		click.play();
 		if(on === false){
-			document.getElementById("switch").style.marginLeft = "50px";
-			//$("#switch").animate({left: "50px"});
+			$("#switch").animate({marginLeft: "50px"});
 			on = true;
 			round = 1;
 			$("#roundNumber").text(round);
 		}
 		else if(on === true){
-			document.getElementById("switch").style.marginLeft = "5px";
-			//$("#switch").animate({left: "5px"});
-			document.getElementById("start").style.backgroundColor = "red";
+			$("#switch").animate({marginLeft: "5px"});
 			document.getElementById("strict").style.backgroundColor = "yellow";
 			start = false;
 			strict = false;
@@ -186,6 +179,8 @@ $(document).ready(function(){
 			cpuCount = 0;
 			playerCount = 0;
 			round = 1;
+			clearInterval(interval);
+
 			$("#roundNumber").text("--");
 		}
 	});
@@ -223,24 +218,18 @@ $(document).ready(function(){
 		$(this).css("background", "red");
 	});
 	
-
 	$("#strict").click(function(){
 		if(strict === false && on === true){
 			document.getElementById("strict").style.backgroundColor = "green";
 			document.getElementById("strictLight").style.backgroundColor = "red";
-
 			strict = true;
 		}
 		else if(strict === true && on === true){
 			document.getElementById("strict").style.backgroundColor = "yellow";
-			document.getElementById("strictLight").style.backgroundColor = "white";
-
+			document.getElementById("strictLight").style.backgroundColor = "silver";
 			strict = false;
 		}
 	});
 });
 
 
-/*Issues
-	When it turns off and turns back on, it's still treated like it's player turn
-*/
