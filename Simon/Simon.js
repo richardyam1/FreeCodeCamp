@@ -9,47 +9,43 @@ $(document).ready(function(){
 	var error = new Audio("http://soundjax.com/reddo/17604%5Eerror.mp3");
 	var click = new Audio("http://soundjax.com/reddo/36340%5EClick03.mp3");
 	var round = 1;
+	var score = 0;
+	var cpuCount = 0;
+	var playerCount = 0;
 	var playerTurn = false;
 	var cpuSequence = [];
 	var playerSequence = [];
-	var cpuCount = 0;
-	var playerCount = 0;
-	var interval;
-	var score = 0;
+	//store timeout function
+	var retry;
+	//store interval function
+	var sequence;
 	$("#green").click(function(){
 		if(playerTurn === true){
-			lightUp("green");
 			playerSequence.push("green");
-			checkMatch();
+			checkMatch("green");
 		}
 	});
 
 	$("#red").click(function(){
 		if(playerTurn === true){
-			lightUp("red");
 			playerSequence.push("red");
-			checkMatch();
+			checkMatch("red");
 		}
 	});
 
 	$("#yellow").click(function(){
 		if(playerTurn === true){
-			lightUp("yellow");
 			playerSequence.push("yellow");
-			checkMatch();
+			checkMatch("yellow");
 		}
 	});
 
 	$("#blue").click(function(){
 		if(playerTurn === true){
-			lightUp("blue");
 			playerSequence.push("blue");
-			checkMatch();
+			checkMatch("blue");
 		}
 	});
-		
-
-
 
 	function cpuPick(){
 		var select = Math.floor((Math.random() * 4) + 1);
@@ -70,8 +66,7 @@ $(document).ready(function(){
 	}
 
 	function playSequence(){
-		interval = setInterval(function(){
-			
+		sequence = setInterval(function(){
 			if(cpuCount < cpuSequence.length){
 				lightUp(cpuSequence[cpuCount]);
 				cpuCount++;
@@ -79,16 +74,16 @@ $(document).ready(function(){
 			else{
 				playerTurn = true;
 				cpuCount = 0;
-				clearInterval(interval);
+				clearInterval(sequence);
 			}
 		}, 1000);
 	}
 
-	function checkMatch(){	
+	function checkMatch(colorMatch){
 		if(playerSequence[playerCount] !== cpuSequence[playerCount]){
 			error.play();
 			$("#roundNumber").html("XX");
-			setTimeout(function(){
+			retry = setTimeout(function(){
 				$("#roundNumber").html(round);
 				if(strict === false){
 					playSequence();
@@ -104,36 +99,38 @@ $(document).ready(function(){
 			}, 1000);
 			playerCount = 0;
 			playerSequence = [];
-			playerTurn = false;
+			playerTurn = false;	
 		}
 		else if(playerSequence[playerCount] === cpuSequence[playerCount]){
+			lightUp(colorMatch);
 			playerCount++;
 		}
 		
 		if(playerCount === cpuSequence.length){
-				playerCount = 0;
-				playerSequence = [];
-				score++;
-				if(score === 20){
-					alert("You win!");
-					cpuSequence = [];
-					round = 1;
-					score = 0;
-				}
-				else{
-					round++;
-				}
-				setTimeout(function(){
-					cpuPick();
-					playSequence();
-				},500);
-				playerTurn = false;
-				$("#roundNumber").html(round);
+			lightUp(colorMatch);
+			playerCount = 0;
+			playerSequence = [];
+			score++;
+			if(score === 20){
+				alert("You win!");
+				cpuSequence = [];
+				round = 1;
+				score = 0;
+			}
+			else{
+				round++;
+			}
+			setTimeout(function(){
+				cpuPick();
+				playSequence();
+			},500);
+			playerTurn = false;
+			$("#roundNumber").html(round);
 		}
 	}
 
-	function lightUp(color){	
-			switch(color){
+	function lightUp(colorLight){
+			switch(colorLight){
 				case "green":
 					greenSound.play();
 					document.getElementById("green").style.backgroundColor = "#2BFF4D";
@@ -155,7 +152,7 @@ $(document).ready(function(){
 
 
 		setTimeout(function(){
-			document.getElementById(color).style.backgroundColor = color;
+			document.getElementById(colorLight).style.backgroundColor = colorLight;
 		},400);
 	}
 
@@ -179,8 +176,8 @@ $(document).ready(function(){
 			cpuCount = 0;
 			playerCount = 0;
 			round = 1;
-			clearInterval(interval);
-
+			clearInterval(sequence);
+			clearTimeout(retry);
 			$("#roundNumber").text("--");
 		}
 	});
