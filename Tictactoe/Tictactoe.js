@@ -5,6 +5,8 @@ $(document).ready(function(){
 	var score2 = 0;
 	var player1;
 	var player2;
+	var computer;
+	var vsCPU = false;
 	var winner = [
 		[1, 2, 3],
 		[4, 5, 6],
@@ -22,12 +24,41 @@ $(document).ready(function(){
 	$("#score1").text(score1);
 	$("#score2").text(score2);
 
+	$("#vsPlayer").click(function(){
+		resetBoard();
+		$("#player2").html("Player 2" + '<div class = "score" id = "score2">' + '</div>' + '<div class = "playerMark" id = "mark2">'  + '</div>' + '<div class = "turnStatus" id = "turn2">' + '</div>');
+		score1 = 0;
+		score2 = 0;
+		$("#mark1").text("");
+		$("#turn1").text("");
+		$("#turn2").text("");
+		$("#score1").text(score1);
+		$("#score2").text(score2);
+		vsCPU = false;
+		gameover = true;
+	});
+
+	$("#vsCPU").click(function(){
+		resetBoard();
+		$("#player2").html("CPU" + '<div class = "score" id = "score2">' + '</div>' + '<div class = "playerMark" id = "mark2">' + '</div>' + '<div class = "turnStatus" id = "turn2">' + '</div>');
+		score1 = 0;
+		score2 = 0;
+		$("#mark1").text("");
+		$("#turn1").text("");
+		$("#turn2").text("");
+		$("#score1").text(score1);
+		$("#score2").text(score2);
+		vsCPU = true;
+		turn1 = true;
+		gameover = true;
+	});
+
 	$("#markX").click(function(){
 		player1 = "X";
 		player2 = "O";
 		gameover = false;
-		$("#mark1").text("X");
-		$("#mark2").text("O");
+		$("#mark1").text(player1);
+		$("#mark2").text(player2);
 		$("#turn1").text("Player 1 turn");
 		resetBoard();
 	});
@@ -45,41 +76,94 @@ $(document).ready(function(){
 	$(".panel").click(function(){
 		if($(this).data("filled") !== true && gameover === false) {
 			if(turn1){
+				$(this).data("mark", player1);
+
 				if(player1 === "X"){
 					$(this).addClass("x-play");
-					$(this).data("mark", "X");
-					
 				}
 				else if(player1 === "O"){
 					$(this).addClass("o-play");
-					$(this).data("mark", "O");
-
 				}
+
 				$("#turn1").text("");
 				$("#turn2").text("Player 2 turn");
 				$(this).data("filled", true);
+				$(this).addClass("play1");
+
 			}
-			else{
+			/*
+			else if(vsCPU && !turn1){
+				firstCPU();
+			}*/
+			else if (turn1 === false && vsCPU === false){
+				$(this).data("mark", player2);
+
 				if(player2 === "X"){
 					$(this).addClass("x-play");
-					$(this).data("mark", "X");
 				}
 				else if(player2 === "O"){
 					$(this).addClass("o-play");
-					$(this).data("mark", "O");
 				}
+
 				$("#turn1").text("Player 1 turn");
 				$("#turn2").text("");
 				$(this).data("filled", true);
+				$(this).addClass("play2");
 
 			}
 			captureSquare.play();
+			plays++;
 			checkGame();
 			turn1 = !turn1;
-			plays++;
+			if(vsCPU && turn1 ===false){
+				firstCPU();
+			}
 		}
 
 	});
+
+	function CPU(p1,p2,p3){
+		if(($(".panel[data-square='"+p1+"']").data("mark") ===$(".panel[data-square='"+p2+"']").data("mark"))
+			&& $(".panel[data-square='"+p1+"']").data("filled") === true && $(".panel[data-square='"+p2+"']").data("filled") === true){
+				$(".panel[data-square='"+p3+"']").data("mark", computer);
+				$(".panel[data-square='"+p3+"']").data("filled",true);
+		}
+		else if(($(".panel[data-square='"+p1+"']").data("mark") ===$(".panel[data-square='"+p3+"']").data("mark"))
+			&& $(".panel[data-square='"+p1+"']").data("filled") === true && $(".panel[data-square='"+p3+"']").data("filled") === true){
+				$(".panel[data-square='"+p2+"']").data("mark", computer);
+				$(".panel[data-square='"+p2+"']").data("filled",true);
+
+
+		}
+		else if(($(".panel[data-square='"+p2+"']").data("mark") ===$(".panel[data-square='"+p3+"']").data("mark"))
+			&& $(".panel[data-square='"+p2+"']").data("filled") === true && $(".panel[data-square='"+p3+"']").data("filled") === true){
+				$(".panel[data-square='"+p1+"']").data("mark", computer);
+				$(".panel[data-square='"+p1+"']").data("filled",true);
+		}
+	}
+
+	function firstCPU(){
+		for(var i = 0; i < 100; i++){
+			var firstmove = Math.floor((Math.random() * 9) + 1);
+			if(checkEmpty(firstmove)){
+				if(player2 === "X"){
+					$(".panel[data-square]='"+firstmove+"'").addClass("x-play");
+				}
+				else if(player2 === "O"){
+					$(".panel[data-square]='"+firstmove+"'").addClass("o-play");
+				}
+				$(".panel[data-square]='"+firstmove+"'").data("filled",true);
+				$(".panel[data-square]='"+firstmove+"'").data("mark",computer);
+				$(".panel[data-square]='"+firstmove+"'").addClass("play2");
+
+				checkGame();
+				vsCPU = !vsCPU;
+				turn1 = !turn1;
+				break;
+			}
+		}
+	}
+
 	function gameOver(p1,p2,p3){
 		if(($(".panel[data-square='"+p1+"']").data("mark") ===$(".panel[data-square='"+p2+"']").data("mark") && $(".panel[data-square='"+p1+"']").data("mark") ===$(".panel[data-square='"+p3+"']").data("mark"))
 			&& $(".panel[data-square='"+p1+"']").data("filled") === true && $(".panel[data-square='"+p2+"']").data("filled") === true && $(".panel[data-square='"+p3+"']").data("filled") === true)
@@ -92,7 +176,6 @@ $(document).ready(function(){
 			return false;
 		}
 		
-
 	}
 
 	function checkGame(){
@@ -113,18 +196,28 @@ $(document).ready(function(){
 					$("#turn2").text("");
 				}
 				alert("test");
-				resetBoard();
+				//resetBoard();
 
-				}
+			}
 				
 			else if(!win){
-				if (plays === 8){
+				if (plays ===9){
 					alert("draw");
 					resetBoard();
 				}
 				
 			}
 			
+		}
+
+	}
+
+	function checkEmpty(square){
+		if($(".panel[data-square='"+square+"']").data("filled") === true){
+			return false;
+		}
+		else{
+			return true;
 		}
 
 	}
@@ -140,3 +233,6 @@ $(document).ready(function(){
 		resetBoard();
 	});
 });
+
+
+
