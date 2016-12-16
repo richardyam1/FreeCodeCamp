@@ -18,7 +18,7 @@ $(document).ready(function(){
 		[3, 5, 7]
 	];
 	var plays = 0;
-	
+	var cpuPick;
 	var captureSquare = new Audio("http://www.qwizx.com/gssfx/usa/hs-ding.wav");
 
 	$("#score1").text(score1);
@@ -26,6 +26,7 @@ $(document).ready(function(){
 
 	$("#vsPlayer").click(function(){
 		resetBoard();
+		//Done this way instead of just text so all the <div> within player2 don't get replaced
 		$("#player2").html("Player 2" + '<div class = "score" id = "score2">' + '</div>' + '<div class = "playerMark" id = "mark2">'  + '</div>' + '<div class = "turnStatus" id = "turn2">' + '</div>');
 		score1 = 0;
 		score2 = 0;
@@ -59,7 +60,9 @@ $(document).ready(function(){
 		gameover = false;
 		$("#mark1").text(player1);
 		$("#mark2").text(player2);
-		$("#turn1").text("Player 1 turn");
+		if(turn1){
+			$("#turn1").text("Player 1 turn");
+		}
 		resetBoard();
 	});
 
@@ -67,9 +70,11 @@ $(document).ready(function(){
 		player1 = "O";
 		player2 = "X";
 		gameover = false;
-		$("#mark1").text("O");
-		$("#mark2").text("X");
-		$("#turn1").text("Player 1 turn");
+		$("#mark1").text(player1);
+		$("#mark2").text(player2);
+		if(turn1){
+			$("#turn1").text("Player 1 turn");
+		}
 		resetBoard();
 	});
 
@@ -89,12 +94,11 @@ $(document).ready(function(){
 				$("#turn2").text("Player 2 turn");
 				$(this).data("filled", true);
 				$(this).addClass("play1");
-
+				if(vsCPU === false){
+					turn1 = !turn1;
+				}
 			}
-			/*
-			else if(vsCPU && !turn1){
-				firstCPU();
-			}*/
+			
 			else if (turn1 === false && vsCPU === false){
 				$(this).data("mark", player2);
 
@@ -109,18 +113,20 @@ $(document).ready(function(){
 				$("#turn2").text("");
 				$(this).data("filled", true);
 				$(this).addClass("play2");
-
+				turn1 = !turn1;
 			}
 			captureSquare.play();
 			plays++;
 			checkGame();
-			turn1 = !turn1;
-			if(vsCPU && turn1 ===false){
+			
+			if(vsCPU === true){
 				firstCPU();
 			}
 		}
 
 	});
+	
+
 
 	function CPU(p1,p2,p3){
 		if(($(".panel[data-square='"+p1+"']").data("mark") ===$(".panel[data-square='"+p2+"']").data("mark"))
@@ -132,7 +138,6 @@ $(document).ready(function(){
 			&& $(".panel[data-square='"+p1+"']").data("filled") === true && $(".panel[data-square='"+p3+"']").data("filled") === true){
 				$(".panel[data-square='"+p2+"']").data("mark", computer);
 				$(".panel[data-square='"+p2+"']").data("filled",true);
-
 
 		}
 		else if(($(".panel[data-square='"+p2+"']").data("mark") ===$(".panel[data-square='"+p3+"']").data("mark"))
@@ -147,10 +152,11 @@ $(document).ready(function(){
 			var firstmove = Math.floor((Math.random() * 9) + 1);
 			if(checkEmpty(firstmove)){
 				if(player2 === "X"){
-					$(".panel[data-square]='"+firstmove+"'").addClass("x-play");
+					$(".panel[data-square='"+firstmove+"'").addClass("x-play");
 				}
 				else if(player2 === "O"){
-					$(".panel[data-square]='"+firstmove+"'").addClass("o-play");
+
+					$(".panel[data-square='"+firstmove+"'").addClass("o-play");
 				}
 				$(".panel[data-square]='"+firstmove+"'").data("filled",true);
 				$(".panel[data-square]='"+firstmove+"'").data("mark",computer);
@@ -158,7 +164,7 @@ $(document).ready(function(){
 
 				checkGame();
 				vsCPU = !vsCPU;
-				turn1 = !turn1;
+				turn1 = true;
 				break;
 			}
 		}
@@ -195,7 +201,6 @@ $(document).ready(function(){
 					$("#turn1").text("Player 1 turn");
 					$("#turn2").text("");
 				}
-				alert("test");
 				//resetBoard();
 
 			}
