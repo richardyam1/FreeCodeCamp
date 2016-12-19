@@ -94,6 +94,7 @@ $(document).ready(function(){
 				$("#turn2").text("Player 2 turn");
 				$(this).data("filled", true);
 				$(this).addClass("play1");
+				checkGame();
 				if(vsCPU === false){
 					turn1 = !turn1;
 				}
@@ -113,11 +114,11 @@ $(document).ready(function(){
 				$("#turn2").text("");
 				$(this).data("filled", true);
 				$(this).addClass("play2");
+				checkGame();
 				turn1 = !turn1;
 			}
 			captureSquare.play();
 			plays++;
-			checkGame();
 			
 			if(vsCPU === true){
 				firstCPU();
@@ -148,14 +149,16 @@ $(document).ready(function(){
 	}
 
 	function firstCPU(){
-		for(var i = 0; i < 100; i++){
+		setTimeout(function(){
+			for(var i = 0; i < 100; i++){
 			var firstmove = Math.floor((Math.random() * 9) + 1);
 			if(checkEmpty(firstmove)){
 				if(player2 === "X"){
+					captureSquare.play();
 					$(".panel[data-square='"+firstmove+"'").addClass("x-play");
 				}
 				else if(player2 === "O"){
-
+					captureSquare.play();
 					$(".panel[data-square='"+firstmove+"'").addClass("o-play");
 				}
 				$(".panel[data-square]='"+firstmove+"'").data("filled",true);
@@ -168,6 +171,8 @@ $(document).ready(function(){
 				break;
 			}
 		}
+		},1500);
+		
 	}
 
 	function gameOver(p1,p2,p3){
@@ -189,26 +194,38 @@ $(document).ready(function(){
 			var win = gameOver(winner[i][0], winner[i][1], winner[i][2]);
 			if (win){
 				if (turn1){
+					alert("Player 1 Wins");
 					score1++;
 					$("#score1").text(score1);
 					$("#turn1").text("");
 					$("#turn2").text("Player 2 turn");
 
 				}
-				else{
+				else {
+					if(turn1 === false && vsCPU === false){
+						alert("Player 2 Wins");
+					}
+					else if (vsCPU === true){
+						alert("CPU wins");
+					}
 					score2++;
 					$("#score2").text(score2);
 					$("#turn1").text("Player 1 turn");
 					$("#turn2").text("");
 				}
-				//resetBoard();
+
+				setTimeout(function(){
+					resetBoard();
+				},2000);
 
 			}
 				
 			else if(!win){
-				if (plays ===9){
+				if (plays ===8){
 					alert("draw");
-					resetBoard();
+					setTimeout(function(){
+						resetBoard();
+					}, 2000)
 				}
 				
 			}
