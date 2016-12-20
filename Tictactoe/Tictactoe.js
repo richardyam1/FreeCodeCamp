@@ -94,7 +94,7 @@ $(document).ready(function(){
 				$("#turn2").text("Player 2 turn");
 				$(this).data("filled", true);
 				$(this).addClass("play1");
-				checkGame();
+				checkWin();
 				if(vsCPU === false){
 					turn1 = !turn1;
 				}
@@ -114,13 +114,14 @@ $(document).ready(function(){
 				$("#turn2").text("");
 				$(this).data("filled", true);
 				$(this).addClass("play2");
-				checkGame();
+				checkWin();
 				turn1 = !turn1;
 			}
 			captureSquare.play();
 			plays++;
 			
 			if(vsCPU === true){
+				turn1 = !turn1;
 				firstCPU();
 			}
 		}
@@ -151,28 +152,38 @@ $(document).ready(function(){
 	function firstCPU(){
 		setTimeout(function(){
 			for(var i = 0; i < 100; i++){
-			var firstmove = Math.floor((Math.random() * 9) + 1);
-			if(checkEmpty(firstmove)){
-				if(player2 === "X"){
-					captureSquare.play();
-					$(".panel[data-square='"+firstmove+"'").addClass("x-play");
+				var firstmove = Math.floor((Math.random() * 9) + 1);
+				if(checkEmpty(firstmove)){
+					if(player2 === "X"){
+						captureSquare.play();
+						$(".panel[data-square='"+firstmove+"'").addClass("x-play");
+					}
+					else if(player2 === "O"){
+						captureSquare.play();
+						$(".panel[data-square='"+firstmove+"'").addClass("o-play");
+					}
+					$(".panel[data-square='"+firstmove+"'").data("filled",true);
+					$(".panel[data-square='"+firstmove+"'").data("mark",computer);
+					$(".panel[data-square='"+firstmove+"'").addClass("play2");
+					$("#turn1").text("Player 1 turn");
+					$("#turn2").text("");
+					checkWin();
+					turn1 = !turn1;
+					break;
 				}
-				else if(player2 === "O"){
-					captureSquare.play();
-					$(".panel[data-square='"+firstmove+"'").addClass("o-play");
-				}
-				$(".panel[data-square]='"+firstmove+"'").data("filled",true);
-				$(".panel[data-square]='"+firstmove+"'").data("mark",computer);
-				$(".panel[data-square]='"+firstmove+"'").addClass("play2");
-
-				checkGame();
-				vsCPU = !vsCPU;
-				turn1 = true;
-				break;
 			}
-		}
 		},1500);
 		
+	}
+
+	function checkEmpty(square){
+		if($(".panel[data-square='"+square+"']").data("filled") === true){
+			return false;
+		}
+		else{
+			return true;
+		}
+
 	}
 
 	function gameOver(p1,p2,p3){
@@ -189,7 +200,7 @@ $(document).ready(function(){
 		
 	}
 
-	function checkGame(){
+	function checkWin(){
 		for(var i = 0; i < winner.length; i++){
 			var win = gameOver(winner[i][0], winner[i][1], winner[i][2]);
 			if (win){
@@ -234,15 +245,7 @@ $(document).ready(function(){
 
 	}
 
-	function checkEmpty(square){
-		if($(".panel[data-square='"+square+"']").data("filled") === true){
-			return false;
-		}
-		else{
-			return true;
-		}
-
-	}
+	
 
 	function resetBoard(){
 		$(".panel").removeClass('x-play');
