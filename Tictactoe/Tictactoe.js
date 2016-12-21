@@ -15,7 +15,7 @@ $(document).ready(function(){
 		[2, 5, 8],
 		[3, 6, 9],
 		[1, 5, 9],
-		[3, 5, 7]
+		[3, 5, 7],
 	];
 	var plays = 0;
 	var cpuPick;
@@ -100,6 +100,10 @@ $(document).ready(function(){
 				if(vsCPU === false){
 					turn1 = !turn1;
 				}
+				else if(vsCPU === true){
+					turn1 = !turn1;
+					firstCPU();
+				}
 			}
 			
 			else if (turn1 === false && vsCPU === false){
@@ -121,10 +125,7 @@ $(document).ready(function(){
 			}
 			captureSquare.play();
 			plays++;
-			if(vsCPU === true){
-				turn1 = !turn1;
-				firstCPU();
-			}
+			
 		}
 
 	});
@@ -237,6 +238,8 @@ $(document).ready(function(){
 			}
 				
 			else if(!win && plays === 8){
+				//changes i to stop the loop
+				i = winner.length;
 				alert("Draw");
 				setTimeout(function(){
 					resetBoard();
