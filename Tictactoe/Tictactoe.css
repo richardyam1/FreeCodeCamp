@@ -108,6 +108,11 @@ h2{
 	content: "O";
 }
 
+.win{
+	background-color: red;
+}
+
+
 .chair{
 	width:200px;
 	height: 70px;
