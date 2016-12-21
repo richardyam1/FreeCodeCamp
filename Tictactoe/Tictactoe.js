@@ -78,6 +78,8 @@ $(document).ready(function(){
 		resetBoard();
 	});
 
+
+
 	$(".panel").click(function(){
 		if($(this).data("filled") !== true && gameover === false) {
 			if(turn1){
@@ -93,7 +95,7 @@ $(document).ready(function(){
 				$("#turn1").text("");
 				$("#turn2").text("Player 2 turn");
 				$(this).data("filled", true);
-				$(this).addClass("play1");
+				//$(this).addClass("play1");
 				checkWin();
 				if(vsCPU === false){
 					turn1 = !turn1;
@@ -113,13 +115,12 @@ $(document).ready(function(){
 				$("#turn1").text("Player 1 turn");
 				$("#turn2").text("");
 				$(this).data("filled", true);
-				$(this).addClass("play2");
+				//$(this).addClass("play2");
 				checkWin();
 				turn1 = !turn1;
 			}
 			captureSquare.play();
 			plays++;
-			
 			if(vsCPU === true){
 				turn1 = !turn1;
 				firstCPU();
@@ -164,7 +165,7 @@ $(document).ready(function(){
 					}
 					$(".panel[data-square='"+firstmove+"'").data("filled",true);
 					$(".panel[data-square='"+firstmove+"'").data("mark",computer);
-					$(".panel[data-square='"+firstmove+"'").addClass("play2");
+					//$(".panel[data-square='"+firstmove+"'").addClass("play2");
 					$("#turn1").text("Player 1 turn");
 					$("#turn2").text("");
 					checkWin();
@@ -189,9 +190,13 @@ $(document).ready(function(){
 	function gameOver(p1,p2,p3){
 		if(($(".panel[data-square='"+p1+"']").data("mark") ===$(".panel[data-square='"+p2+"']").data("mark") && $(".panel[data-square='"+p1+"']").data("mark") ===$(".panel[data-square='"+p3+"']").data("mark"))
 			&& $(".panel[data-square='"+p1+"']").data("filled") === true && $(".panel[data-square='"+p2+"']").data("filled") === true && $(".panel[data-square='"+p3+"']").data("filled") === true)
-		{
-			return true;
+		{	
+			//document.getElementById("s" + p1).classList.add("win");
+			$(".panel[data-square='"+p1+"']").addClass("win");
+			$(".panel[data-square='"+p2+"']").addClass("win");
+			$(".panel[data-square='"+p3+"']").addClass("win");
 
+			return true;
 		}
 		else{
 			
@@ -231,25 +236,27 @@ $(document).ready(function(){
 
 			}
 				
-			else if(!win){
-				if (plays ===8){
-					alert("draw");
-					setTimeout(function(){
-						resetBoard();
-					}, 2000)
-				}
+			else if(!win && plays === 8){
+				alert("Draw");
+				setTimeout(function(){
+					resetBoard();
+				}, 2000)
+				
 				
 			}
+			
+			
+			
 			
 		}
 
 	}
 
-	
 
 	function resetBoard(){
 		$(".panel").removeClass('x-play');
 		$(".panel").removeClass('o-play');
+		$(".panel").removeClass('win');
 		$(".panel").data("filled", "");
 		plays = 0;
 		
