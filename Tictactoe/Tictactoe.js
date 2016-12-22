@@ -1,3 +1,9 @@
+/*Issues
+1.  Draw not working properly against CPU
+
+*/
+
+
 $(document).ready(function(){
 	var turn1 = true;
 	var gameover = true;
@@ -81,6 +87,7 @@ $(document).ready(function(){
 
 
 	$(".panel").click(function(){
+
 		if($(this).data("filled") !== true && gameover === false) {
 			if(turn1){
 				$(this).data("mark", player1);
@@ -97,13 +104,8 @@ $(document).ready(function(){
 				$(this).data("filled", true);
 				//$(this).addClass("play1");
 				checkWin();
-				if(vsCPU === false){
-					turn1 = !turn1;
-				}
-				else if(vsCPU === true){
-					turn1 = !turn1;
-					firstCPU();
-				}
+				turn1 = !turn1;
+				
 			}
 			
 			else if (turn1 === false && vsCPU === false){
@@ -125,14 +127,17 @@ $(document).ready(function(){
 			}
 			captureSquare.play();
 			plays++;
-			
+			alert(plays)
+			if(vsCPU === true && gameover === false){
+				moveCPU();
+			}
 		}
 
 	});
 	
 
 
-	function CPU(p1,p2,p3){
+	function optimalCPU(p1,p2,p3){
 		if(($(".panel[data-square='"+p1+"']").data("mark") ===$(".panel[data-square='"+p2+"']").data("mark"))
 			&& $(".panel[data-square='"+p1+"']").data("filled") === true && $(".panel[data-square='"+p2+"']").data("filled") === true){
 				$(".panel[data-square='"+p3+"']").data("mark", computer);
@@ -151,7 +156,7 @@ $(document).ready(function(){
 		}
 	}
 
-	function firstCPU(){
+	function moveCPU(){
 		setTimeout(function(){
 			for(var i = 0; i < 100; i++){
 				var firstmove = Math.floor((Math.random() * 9) + 1);
@@ -169,8 +174,10 @@ $(document).ready(function(){
 					//$(".panel[data-square='"+firstmove+"'").addClass("play2");
 					$("#turn1").text("Player 1 turn");
 					$("#turn2").text("");
+					plays++;
 					checkWin();
 					turn1 = !turn1;
+
 					break;
 				}
 			}
@@ -216,7 +223,7 @@ $(document).ready(function(){
 					$("#score1").text(score1);
 					$("#turn1").text("");
 					$("#turn2").text("Player 2 turn");
-
+					gameover = true;
 				}
 				else {
 					if(turn1 === false && vsCPU === false){
@@ -235,6 +242,11 @@ $(document).ready(function(){
 					resetBoard();
 				},2000);
 
+				setTimeout(function(){
+					if(vsCPU === true && turn1 === false){
+						moveCPU();
+					}	
+				},2000);
 			}
 				
 			else if(!win && plays === 8){
@@ -261,8 +273,9 @@ $(document).ready(function(){
 		$(".panel").removeClass('o-play');
 		$(".panel").removeClass('win');
 		$(".panel").data("filled", "");
+		$(".panel").data("mark", "");
 		plays = 0;
-		
+		gameover = false;
 	}
 	$("#clearBoard").click(function(){
 		resetBoard();
