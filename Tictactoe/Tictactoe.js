@@ -1,5 +1,5 @@
 /*Issues
-1.  Draw not working properly against CPU
+1.  Move registers as a draw even when 3 squares match.  Happens only on the final move
 
 */
 
@@ -143,7 +143,8 @@ $(document).ready(function(){
 				var p2 = winner[i][1];
 				var p3 = winner[i][2];
 				if(($(".panel[data-square='"+p1+"']").data("mark") ===$(".panel[data-square='"+p2+"']").data("mark"))
-					&& $(".panel[data-square='"+p1+"']").data("filled") === true && $(".panel[data-square='"+p2+"']").data("filled") === true){
+					&& $(".panel[data-square='"+p1+"']").data("filled") === true && $(".panel[data-square='"+p2+"']").data("filled") === true
+					&& $(".panel[data-square='"+p3+"']").data("filled") === ""){
 						if(player2 === "X"){
 							captureSquare.play();
 							$(".panel[data-square='"+p3+"'").addClass("x-play");
@@ -160,7 +161,8 @@ $(document).ready(function(){
 						break;
 				}
 				else if(($(".panel[data-square='"+p1+"']").data("mark") ===$(".panel[data-square='"+p3+"']").data("mark"))
-					&& $(".panel[data-square='"+p1+"']").data("filled") === true && $(".panel[data-square='"+p3+"']").data("filled") === true){
+					&& $(".panel[data-square='"+p1+"']").data("filled") === true && $(".panel[data-square='"+p3+"']").data("filled") === true
+					&& $(".panel[data-square='"+p2+"']").data("filled") === ""){
 						if(player2 === "X"){
 							captureSquare.play();
 							$(".panel[data-square='"+p2+"'").addClass("x-play");
@@ -178,7 +180,8 @@ $(document).ready(function(){
 
 				}
 				else if(($(".panel[data-square='"+p2+"']").data("mark") ===$(".panel[data-square='"+p3+"']").data("mark"))
-					&& $(".panel[data-square='"+p2+"']").data("filled") === true && $(".panel[data-square='"+p3+"']").data("filled") === true){
+					&& $(".panel[data-square='"+p2+"']").data("filled") === true && $(".panel[data-square='"+p3+"']").data("filled") === true
+					&& $(".panel[data-square='"+p1+"']").data("filled") === ""){
 						if(player2 === "X"){
 							captureSquare.play();
 							$(".panel[data-square='"+p1+"'").addClass("x-play");
@@ -284,6 +287,11 @@ $(document).ready(function(){
 				setTimeout(function(){
 					resetBoard();
 				}, 2000)
+				setTimeout(function(){
+					if(vsCPU === true && turn1 === false){
+						optimalCPU();
+					}	
+				},2000);
 				
 				
 			}
