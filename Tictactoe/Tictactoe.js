@@ -1,6 +1,5 @@
 /*Issues
-1.  Move registers as a draw even when 3 squares match.  Happens only on the final move
-
+1.  CPU does not go when board is resetted(by pressing reset button or X/O button).  Acts like it's not it's turn
 */
 
 $(document).ready(function(){
@@ -42,6 +41,7 @@ $(document).ready(function(){
 		$("#score2").text(score2);
 		vsCPU = false;
 		gameover = true;
+		clearTimeout(cpuPick);
 	});
 
 	$("#vsCPU").click(function(){
@@ -57,9 +57,11 @@ $(document).ready(function(){
 		vsCPU = true;
 		turn1 = true;
 		gameover = true;
+		clearTimeout(cpuPick);
 	});
 
 	$("#markX").click(function(){
+		resetBoard();
 		player1 = "X";
 		player2 = "O";
 		gameover = false;
@@ -68,10 +70,10 @@ $(document).ready(function(){
 		if(turn1){
 			$("#turn1").text("Player 1 turn");
 		}
-		resetBoard();
 	});
 
 	$("#markO").click(function(){
+		resetBoard();
 		player1 = "O";
 		player2 = "X";
 		gameover = false;
@@ -80,13 +82,11 @@ $(document).ready(function(){
 		if(turn1){
 			$("#turn1").text("Player 1 turn");
 		}
-		resetBoard();
 	});
 
 
 
 	$(".panel").click(function(){
-
 		if($(this).data("filled") !== true && gameover === false) {
 			if(turn1){
 				$(this).data("mark", player1);
@@ -101,7 +101,6 @@ $(document).ready(function(){
 				$("#turn1").text("");
 				$("#turn2").text("Player 2 turn");
 				$(this).data("filled", true);
-				//$(this).addClass("play1");
 				plays++;
 				checkWin();
 				turn1 = !turn1;
@@ -121,11 +120,11 @@ $(document).ready(function(){
 				$("#turn1").text("Player 1 turn");
 				$("#turn2").text("");
 				$(this).data("filled", true);
-				//$(this).addClass("play2");
 				plays++;
 				checkWin();
 				turn1 = !turn1;
 			}
+
 			captureSquare.play();
 			if(vsCPU === true && gameover === false){
 				optimalCPU();
@@ -133,11 +132,9 @@ $(document).ready(function(){
 		}
 
 	});
-	
-
 
 	function optimalCPU(){
-		setTimeout(function(){
+		cpuPick = setTimeout(function(){
 			for(i = 0; i < winner.length; i++){
 				var p1 = winner[i][0];
 				var p2 = winner[i][1];
@@ -198,7 +195,7 @@ $(document).ready(function(){
 						break;
 				}
 				else if(i === 7){
-					moveCPU();
+					randomCPU();
 				}
 			}
 		}, 1500);
@@ -206,7 +203,7 @@ $(document).ready(function(){
 		
 	}
 
-	function moveCPU(){	
+	function randomCPU(){	
 			for(var i = 0; i < 100; i++){
 				var firstmove = Math.floor((Math.random() * 9) + 1);
 				if(checkEmpty(firstmove)){
@@ -220,7 +217,6 @@ $(document).ready(function(){
 					}
 					$(".panel[data-square='"+firstmove+"'").data("filled",true);
 					$(".panel[data-square='"+firstmove+"'").data("mark",computer);
-					//$(".panel[data-square='"+firstmove+"'").addClass("play2");
 					$("#turn1").text("Player 1 turn");
 					$("#turn2").text("");
 					plays++;
@@ -278,22 +274,20 @@ $(document).ready(function(){
 						optimalCPU();
 					}	
 				},2000);
+				break;
 			}
 				
-			else if(!win && plays === 9){
+			else if(!win && plays === 9 && i === (winner.length - 1)){
 				//changes i to stop the loop
-				i = winner.length;
 				alert("Draw");
 				setTimeout(function(){
 					resetBoard();
-				}, 2000)
+				}, 2000);
 				setTimeout(function(){
 					if(vsCPU === true && turn1 === false){
 						optimalCPU();
 					}	
 				},2000);
-				
-				
 			}
 			
 			
@@ -307,7 +301,6 @@ $(document).ready(function(){
 		if(($(".panel[data-square='"+p1+"']").data("mark") ===$(".panel[data-square='"+p2+"']").data("mark") && $(".panel[data-square='"+p1+"']").data("mark") ===$(".panel[data-square='"+p3+"']").data("mark"))
 			&& $(".panel[data-square='"+p1+"']").data("filled") === true && $(".panel[data-square='"+p2+"']").data("filled") === true && $(".panel[data-square='"+p3+"']").data("filled") === true)
 		{	
-			//document.getElementById("s" + p1).classList.add("win");
 			$(".panel[data-square='"+p1+"']").addClass("win");
 			$(".panel[data-square='"+p2+"']").addClass("win");
 			$(".panel[data-square='"+p3+"']").addClass("win");
@@ -327,6 +320,7 @@ $(document).ready(function(){
 		$(".panel").removeClass('win');
 		$(".panel").data("filled", "");
 		$(".panel").data("mark", "");
+		clearTimeout(cpuPick);
 		plays = 0;
 		gameover = false;
 	}
