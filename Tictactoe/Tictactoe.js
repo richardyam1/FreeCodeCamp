@@ -1,7 +1,3 @@
-/*Issues
-1.  CPU does not go when board is resetted(by pressing reset button or X/O button).  Acts like it's not it's turn
-*/
-
 $(document).ready(function(){
 	var turn1 = true;
 	var gameover = true;
@@ -60,6 +56,25 @@ $(document).ready(function(){
 		clearTimeout(cpuPick);
 	});
 
+	$("#clearBoard").click(function(){
+		resetBoard();
+		$("#mark1").text("");
+		$("#mark2").text("");
+		$("#turn1").text("");
+		$("#turn2").text("");
+	});
+
+	function resetBoard(){
+		$(".panel").removeClass('x-play');
+		$(".panel").removeClass('o-play');
+		$(".panel").removeClass('win');
+		$(".panel").data("filled", "");
+		$(".panel").data("mark", "");
+		clearTimeout(cpuPick);
+		plays = 0;
+		gameover = false;
+	}
+
 	$("#markX").click(function(){
 		resetBoard();
 		player1 = "X";
@@ -69,6 +84,13 @@ $(document).ready(function(){
 		$("#mark2").text(player2);
 		if(turn1){
 			$("#turn1").text("Player 1 turn");
+		}
+		else if (!turn1 && vsCPU === false){
+			$("#turn2").text("Player 2 turn");
+		}
+		else if (!turn1 && vsCPU === true){
+			$("#turn2").text("CPU turn");
+			optimalCPU();
 		}
 	});
 
@@ -81,6 +103,13 @@ $(document).ready(function(){
 		$("#mark2").text(player2);
 		if(turn1){
 			$("#turn1").text("Player 1 turn");
+		}
+		else if (!turn1 && vsCPU === false){
+			$("#turn2").text("Player 2 turn");
+		}
+		else if (!turn1 && vsCPU === true){
+			$("#turn2").text("CPU turn");
+			optimalCPU();
 		}
 	});
 
@@ -99,7 +128,13 @@ $(document).ready(function(){
 				}
 
 				$("#turn1").text("");
-				$("#turn2").text("Player 2 turn");
+				if(vsCPU === false){
+					$("#turn2").text("Player 2 turn");
+				}
+				else{
+					$("#turn2").text("CPU turn");
+
+				}
 				$(this).data("filled", true);
 				plays++;
 				checkWin();
@@ -314,19 +349,8 @@ $(document).ready(function(){
 		
 	}
 
-	function resetBoard(){
-		$(".panel").removeClass('x-play');
-		$(".panel").removeClass('o-play');
-		$(".panel").removeClass('win');
-		$(".panel").data("filled", "");
-		$(".panel").data("mark", "");
-		clearTimeout(cpuPick);
-		plays = 0;
-		gameover = false;
-	}
-	$("#clearBoard").click(function(){
-		resetBoard();
-	});
+
+	
 });
 
 
