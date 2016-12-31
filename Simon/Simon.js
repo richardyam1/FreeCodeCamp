@@ -47,6 +47,7 @@ $(document).ready(function(){
 		}
 	});
 
+	//Selects random color and pushes it to cpuSequence array
 	function cpuPick(){
 		var select = Math.floor((Math.random() * 4) + 1);
 		switch(select){
@@ -65,12 +66,14 @@ $(document).ready(function(){
 		}
 	}
 
+	//Plays through entire cpuSequence array
 	function playSequence(){
 		sequence = setInterval(function(){
 			if(cpuCount < cpuSequence.length){
 				lightUp(cpuSequence[cpuCount]);
 				cpuCount++;
 			}
+			//Switches to player turn and stops the sequence when it reaches the end of array
 			else{
 				playerTurn = true;
 				cpuCount = 0;
@@ -79,6 +82,7 @@ $(document).ready(function(){
 		}, 1000);
 	}
 
+	//Checks if button sequence match each time user clicks a button
 	function checkMatch(colorMatch){
 		if(playerSequence[playerCount] !== cpuSequence[playerCount]){
 			error.play();
@@ -88,6 +92,7 @@ $(document).ready(function(){
 				if(strict === false){
 					playSequence();
 				}
+				//If in strict mode, sequence array resets and starts over again
 				else if(strict === true){
 					round = 1;
 					score = 0;
@@ -105,7 +110,7 @@ $(document).ready(function(){
 			lightUp(colorMatch);
 			playerCount++;
 		}
-		
+		//When user successfully copies the sequence, it starts again while adding a new color at the end
 		if(playerCount === cpuSequence.length){
 			lightUp(colorMatch);
 			playerCount = 0;
@@ -129,6 +134,7 @@ $(document).ready(function(){
 		}
 	}
 
+	//Changes color of button temporaily
 	function lightUp(colorLight){
 			switch(colorLight){
 				case "green":
@@ -150,7 +156,7 @@ $(document).ready(function(){
 
 			}
 
-
+		//Changes button color back
 		setTimeout(function(){
 			document.getElementById(colorLight).style.backgroundColor = colorLight;
 		},400);
