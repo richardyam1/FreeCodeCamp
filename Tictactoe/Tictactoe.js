@@ -18,6 +18,7 @@ $(document).ready(function(){
 		[3, 5, 7],
 	];
 	var plays = 0;
+	//Timeout function for CPU's turn
 	var cpuPick;
 	var captureSquare = new Audio("http://www.qwizx.com/gssfx/usa/hs-ding.wav");
 
@@ -26,7 +27,7 @@ $(document).ready(function(){
 
 	$("#vsPlayer").click(function(){
 		resetBoard();
-		//Done this way instead of just text so all the <div> within player2 don't get replaced
+		//Replaces html elements on right side
 		$("#player2").html("Player 2" + '<div class = "score" id = "score2">' + '</div>' + '<div class = "playerMark" id = "mark2">'  + '</div>' + '<div class = "turnStatus" id = "turn2">' + '</div>');
 		score1 = 0;
 		score2 = 0;
@@ -36,12 +37,15 @@ $(document).ready(function(){
 		$("#score1").text(score1);
 		$("#score2").text(score2);
 		vsCPU = false;
+		turn1 = true;
 		gameover = true;
+		//Stops CPU when game resets in middle of it's turn
 		clearTimeout(cpuPick);
 	});
 
 	$("#vsCPU").click(function(){
 		resetBoard();
+		//Replaces html elements on right side
 		$("#player2").html("CPU" + '<div class = "score" id = "score2">' + '</div>' + '<div class = "playerMark" id = "mark2">' + '</div>' + '<div class = "turnStatus" id = "turn2">' + '</div>');
 		score1 = 0;
 		score2 = 0;
@@ -53,10 +57,11 @@ $(document).ready(function(){
 		vsCPU = true;
 		turn1 = true;
 		gameover = true;
+		//Stops CPU when game resets in middle of it's turn
 		clearTimeout(cpuPick);
 	});
 
-	$("#clearBoard").click(function(){
+	$("#reset").click(function(){
 		resetBoard();
 		$("#mark1").text("");
 		$("#mark2").text("");
@@ -174,6 +179,7 @@ $(document).ready(function(){
 				var p1 = winner[i][0];
 				var p2 = winner[i][1];
 				var p3 = winner[i][2];
+				//Cause CPU to block player or go for the win.
 				if(($(".panel[data-square='"+p1+"']").data("mark") ===$(".panel[data-square='"+p2+"']").data("mark"))
 					&& $(".panel[data-square='"+p1+"']").data("filled") === true && $(".panel[data-square='"+p2+"']").data("filled") === true
 					&& $(".panel[data-square='"+p3+"']").data("filled") === ""){
@@ -229,6 +235,7 @@ $(document).ready(function(){
 						turn1 = !turn1;
 						break;
 				}
+				//Pick a random empty squared if no optimal move is available
 				else if(i === 7){
 					randomCPU();
 				}
@@ -263,7 +270,7 @@ $(document).ready(function(){
 		
 		
 	}
-
+	//Checks to see if the square is empty
 	function checkEmpty(square){
 		if($(".panel[data-square='"+square+"']").data("filled") === true){
 			return false;
@@ -276,7 +283,9 @@ $(document).ready(function(){
 
 
 	function checkWin(){
+		//Loops through every winning combination
 		for(var i = 0; i < winner.length; i++){
+			//Checks if the winning condition is achieved.  
 			var win = gameOver(winner[i][0], winner[i][1], winner[i][2]);
 			if (win){
 				if (turn1){
@@ -311,13 +320,13 @@ $(document).ready(function(){
 				},2000);
 				break;
 			}
-				
+			//Makes sure that draw message does not play if the winning move is done on the last move
 			else if(!win && plays === 9 && i === (winner.length - 1)){
-				//changes i to stop the loop
 				alert("Draw");
 				setTimeout(function(){
 					resetBoard();
 				}, 2000);
+				//Make the CPU go after board reset if it has the first turn
 				setTimeout(function(){
 					if(vsCPU === true && turn1 === false){
 						optimalCPU();
@@ -336,6 +345,7 @@ $(document).ready(function(){
 		if(($(".panel[data-square='"+p1+"']").data("mark") ===$(".panel[data-square='"+p2+"']").data("mark") && $(".panel[data-square='"+p1+"']").data("mark") ===$(".panel[data-square='"+p3+"']").data("mark"))
 			&& $(".panel[data-square='"+p1+"']").data("filled") === true && $(".panel[data-square='"+p2+"']").data("filled") === true && $(".panel[data-square='"+p3+"']").data("filled") === true)
 		{	
+			//Lights up the winning squares
 			$(".panel[data-square='"+p1+"']").addClass("win");
 			$(".panel[data-square='"+p2+"']").addClass("win");
 			$(".panel[data-square='"+p3+"']").addClass("win");
