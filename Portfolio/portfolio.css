@@ -2,15 +2,19 @@
 
 /* Remove margins and padding from the list, and add a black background color */
 ul.topnav {
+    /*removes bullet points from list */
     list-style-type: none;
     margin: 0;
     padding: 0;
+    /*controls what happens if content overflows element box*/
     overflow: hidden;
-    background-color: #333;
+    background-color: #7F7F7F;
+    text-align: center;
 }
 
-/* Float the list items side by side */
-ul.topnav li {float: right;}
+ul.topnav li {
+    display: inline-block;
+}
 
 /* Style the links inside the list items */
 ul.topnav li a {
@@ -24,7 +28,36 @@ ul.topnav li a {
 }
 
 /* Change background color of links on hover */
-ul.topnav li a:hover {background-color: #555;}
+ul.topnav li a:hover {
+    background-color: #555;
+}
 
 /* Hide the list item that contains the link that should open and close the topnav on small screens */
-ul.topnav li.icon {display: none;}
+ul.topnav li.icon {
+    display: none;
+}
+
+#intro{
+    text-align: center;
+}
+
+h1{
+    text-decoration: underline;
+}
+
+#me{
+    width: 50%;
+    text-align:center;
+}
+
+#picture{
+    text-align: center;
+}
+
+#bio{
+    
+}
+
+#projects_label{
+    text-align: center;
+}
