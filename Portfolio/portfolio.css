@@ -47,17 +47,22 @@ h1{
 
 #me{
     width: 50%;
-    text-align:center;
 }
 
 #picture{
-    text-align: center;
+    
 }
 
 #bio{
     
 }
 
-#projects_label{
+#project_label{
     text-align: center;
+    margin-top: -80px;
+    text-decoration: underline;
+}
+
+#projects{
+    width:50%;
 }
