@@ -1,5 +1,8 @@
 <head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 	<link rel = "stylesheet" href="portfolio.css" type="text/css">
 	<script type="text/javascript" src="portfolio.js"></script>
 	 <meta charset="utf-8"> 
@@ -10,23 +13,29 @@
 
 <div class = "container-fluid">
 
-	<header>
+	<nav class = "menu">
 		<ul class="topnav" id="myTopnav">
 		  <li><a href="#home">Home</a></li>
 		  <li><a href="#contact">Contact</a></li>
 		  <li><a href="#about">About</a></li>
 		  <li class = "dropdown">
-		  	<a href="#" class = "dropbtn">Projects</a>
-		  	<div class = "dropdown-content">
-		  		<a href="#quote">Random Quote Machine</a>
-      			<a href="#weather">Local Weather</a>
-     			<a href="#wiki">Wikipedia Viewer</a>
-     			<a href="#twitch">Twitch.tv</a>
-		  	</div>
+		  	<a href="#" class = "dropbtn">Projects <span class = "arrow">&#9660;</span></a>
+		  	<ul class = "dropdown-content">
+		  		<li><a href = "#wah">King Wah</li>
+		  		<li><a href = "#quote">Random Quote Machine</a></li>
+      			<li><a href = "#weather">Local Weather</a></li>
+     			<li><a href = "#wiki">Wikipedia Viewer</a></li>
+     			<li><a href = "#twitch">Twitch.tv</a></li>
+     			<li><a href = "#calculator">Javascript Calculator</a></li>
+     			<li><a href = "#pomodoro">Pomodoro Clock</a></li>
+     			<li><a href = "#tictactoe">Tictactoe</a></li>
+     			<li><a href = "#simon">Simon</a></li>
+
+		  	</ul>
 		  </li>
 			
 		</ul>
-	</header>
+	</nav>
 
 	<header id = "intro">
 		<h1>Richard Yam</h1>
@@ -54,7 +63,7 @@
 	 		</th>
 
 	 		<th>
-	 			<h2 id = "project_label">King Wah</h2>
+	 			<a href="http://kingwahfood.com/" target="_blank" name = "wah"> <h2 id = "project_label">King Wah</h2> </a>
 	 			My first experience in building a web-site.  I made this page for my parents restaurant using a template and Wordpress.
 	 		</th>
 	 	</tr>
@@ -66,7 +75,7 @@
 	 		</th>
 
 	 		<th>
-				<h2 id = "project_label">Random Quote Machine</h2>
+				<a href="http://codepen.io/richardyam1/full/vKOaLY/" target="_blank" name = "quote"> <h2 id = "project_label">Random Quote Machine</h2></a>
 	 		</th>
 	 	</tr>
 
@@ -77,7 +86,7 @@
 	 		</th>
 
 	 		<th>
-	 			<h2 id = "project_label">Local Weather</h2>
+	 			<a href="http://codepen.io/richardyam1/full/jrWmBg/" target="_blank" name = "weather"><h2 id = "project_label">Local Weather</h2></a>
 	 		</th>
 	 	</tr>
 
@@ -88,7 +97,7 @@
 	 		</th>
 
 	 		<th>
-	 			<h2 id = "project_label">Wikipedia Viewer</h2>
+	 			<a href="http://codepen.io/richardyam1/full/wWMEmy/" target="_blank" name = "wiki"> <h2 id = "project_label">Wikipedia Viewer</h2></a>
 
 	 		</th>
 	 	</tr>
@@ -100,7 +109,7 @@
 	 		</th>
 
 	 		<th>
-	 			<h2 id = "project_label">Twitch.tv</h2>
+	 			<a href="http://codepen.io/richardyam1/full/NrpXwZ/" target="_blank" name = "twitch"> <h2 id = "project_label">Twitch.tv</h2> </a>
 	 		</th>
 	 	</tr>
 
@@ -111,7 +120,7 @@
 	 		</th>
 
 	 		<th>
-	 			<h2 id = "project_label">Javascript Calculator</h2>
+	 			<a href="http://codepen.io/richardyam1/full/YWrqAm/" target="_blank" name = "calculator"> <h2 id = "project_label">Javascript Calculator</h2> </a>
 	 		</th>
 	 	</tr>
 
@@ -122,7 +131,7 @@
 	 		</th>
 
 	 		<th>
-	 			<h2 id = "project_label">Pomodoro Clock</h2>
+	 			<a href="http://codepen.io/richardyam1/full/vXNyoy/" target="_blank" name = "pomodoro"><h2 id = "project_label">Pomodoro Clock</h2></a>
 	 		</th>
 	 	</tr>
 
@@ -133,7 +142,7 @@
 	 		</th>
 
 	 		<th>
-	 			<h2 id = "project_label">Tictactoe</h2>
+	 			<a href="http://codepen.io/richardyam1/full/wzqgbY/" target="_blank" name = "tictactoe"> <h2 id = "project_label">Tictactoe</h2></a>
 	 		</th>
 	 	</tr>
 
@@ -144,16 +153,19 @@
 	 		</th>
 
 	 		<th>
-	 			<h2 id = "project_label">Simon</h2>
+	 			<a href="http://codepen.io/richardyam1/full/ObaaYr/" target="_blank" name = "simon"> <h2 id = "project_label">Simon</h2></a>
 	 		</th>
 	 	</tr>
 
 	 </table>
+	
+	<footer>
+		 <div id = "contact">
+		 	<h1><a name = "contact">Contact</a></h1>
+		 	<div>You can contact me at: <br/>
+		 	<a href> richardyam01@gmail.com</a></div>
+		 </div>
+	</footer>
 
-	 <div id = "contact">
-	 	<h1><a name = "contact">Contact</a></h1>
-	 	<div>You can contact me at: <br/>
-	 	<a href> richardyam01@gmail.com</a></div>
-	 </div>
 
 </div>
