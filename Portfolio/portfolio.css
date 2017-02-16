@@ -17,7 +17,6 @@
 }
 
 .menu > ul > li{
-   
     display:inline-block;
     position:relative;
 }
@@ -67,7 +66,18 @@ h1{
 }
 
 #bio{
-    
+    font-size: 20px;
+}
+
+#bio > p{
+    margin-left: 10px;
+    margin-top: -120px;
+    text-indent: 50px;
+}
+
+p{
+    margin-left: 10px;
+    text-indent: 50px;
 }
 
 #project_label{
@@ -78,6 +88,10 @@ h1{
 
 #projects{
     width:50%;
+}
+
+.project-background{
+    
 }
 
 #contact{
