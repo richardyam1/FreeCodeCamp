@@ -3,7 +3,7 @@
 .menu{
     width: 100%;
     margin: 0px auto;
-    background: #3e3436;
+    background: white;
     text-align:center;
 }
 
@@ -13,6 +13,12 @@
 }
 
 .menu a{
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.menu .dropdown-content a{
     color: white;
 }
 
@@ -30,6 +36,7 @@
     font-size: 8px;
 }
 
+
 .topnav li:hover .dropdown-content{
     z-index: 1;
     opacity:1;
@@ -45,8 +52,10 @@
     opacity:0;
     transition:opacity linear 0.15s;
     box-shadow:0px 2px 3px rgba(0,0,0,0.2);
-    background:#2e2728;
+    background:#8A8B73;
 }
+
+
 
 
 #intro{
