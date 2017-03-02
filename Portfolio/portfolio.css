@@ -70,9 +70,7 @@ h1{
     width: 50%;
 }
 
-#picture{
-    
-}
+
 
 #bio{
     font-size: 20px;
@@ -91,7 +89,7 @@ p{
 
 #project_label{
     text-align: center;
-    margin-top: -80px;
+   
     text-decoration: underline;
 }
 
@@ -99,9 +97,7 @@ p{
     width:100%;
 }
 
-.project-background{
-    
-}
+
 
 #contact{
     text-align: center;
