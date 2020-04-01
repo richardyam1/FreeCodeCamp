@@ -20,7 +20,8 @@ $(document).ready(function(){
 	var plays = 0;
 	//Timeout function for CPU's turn
 	var cpuPick;
-	var captureSquare = new Audio("http://www.qwizx.com/gssfx/usa/hs-ding.wav");
+	var captureSquare1 = new Audio("audio/square1.wav");
+	var captureSquare2 = new Audio("audio/square2.wav");
 
 	$("#score1").text(score1);
 	$("#score2").text(score2);
@@ -123,6 +124,8 @@ $(document).ready(function(){
 	$(".panel").click(function(){
 		if($(this).data("filled") !== true && gameover === false) {
 			if(turn1){
+				captureSquare1.play();
+
 				$(this).data("mark", player1);
 
 				if(player1 === "X"){
@@ -148,6 +151,8 @@ $(document).ready(function(){
 			}
 			
 			else if (turn1 === false && vsCPU === false){
+				captureSquare2.play();
+
 				$(this).data("mark", player2);
 
 				if(player2 === "X"){
@@ -165,7 +170,6 @@ $(document).ready(function(){
 				turn1 = !turn1;
 			}
 
-			captureSquare.play();
 			if(vsCPU === true && gameover === false){
 				optimalCPU();
 			}
@@ -183,12 +187,12 @@ $(document).ready(function(){
 				if(($(".panel[data-square='"+p1+"']").data("mark") ===$(".panel[data-square='"+p2+"']").data("mark"))
 					&& $(".panel[data-square='"+p1+"']").data("filled") === true && $(".panel[data-square='"+p2+"']").data("filled") === true
 					&& $(".panel[data-square='"+p3+"']").data("filled") === ""){
+						captureSquare2.play();
 						if(player2 === "X"){
-							captureSquare.play();
+							
 							$(".panel[data-square='"+p3+"'").addClass("x-play");
 						}
-						else if(player2 === "O"){
-							captureSquare.play();
+						else if(player2 === "O"){		
 							$(".panel[data-square='"+p3+"'").addClass("o-play");
 						}
 						$(".panel[data-square='"+p3+"']").data("mark", computer);
@@ -201,12 +205,13 @@ $(document).ready(function(){
 				else if(($(".panel[data-square='"+p1+"']").data("mark") ===$(".panel[data-square='"+p3+"']").data("mark"))
 					&& $(".panel[data-square='"+p1+"']").data("filled") === true && $(".panel[data-square='"+p3+"']").data("filled") === true
 					&& $(".panel[data-square='"+p2+"']").data("filled") === ""){
+						captureSquare2.play();
+
 						if(player2 === "X"){
-							captureSquare.play();
 							$(".panel[data-square='"+p2+"'").addClass("x-play");
 						}
 						else if(player2 === "O"){
-							captureSquare.play();
+						
 							$(".panel[data-square='"+p2+"'").addClass("o-play");
 						}
 						$(".panel[data-square='"+p2+"']").data("mark", computer);
@@ -220,12 +225,14 @@ $(document).ready(function(){
 				else if(($(".panel[data-square='"+p2+"']").data("mark") ===$(".panel[data-square='"+p3+"']").data("mark"))
 					&& $(".panel[data-square='"+p2+"']").data("filled") === true && $(".panel[data-square='"+p3+"']").data("filled") === true
 					&& $(".panel[data-square='"+p1+"']").data("filled") === ""){
+							captureSquare2.play();
+
 						if(player2 === "X"){
-							captureSquare.play();
+							
 							$(".panel[data-square='"+p1+"'").addClass("x-play");
 						}
 						else if(player2 === "O"){
-							captureSquare.play();
+							
 							$(".panel[data-square='"+p1+"'").addClass("o-play");
 						}
 						$(".panel[data-square='"+p1+"']").data("mark", computer);
@@ -249,12 +256,14 @@ $(document).ready(function(){
 			for(var i = 0; i < 100; i++){
 				var firstmove = Math.floor((Math.random() * 9) + 1);
 				if(checkEmpty(firstmove)){
+					captureSquare2.play();
+
 					if(player2 === "X"){
-						captureSquare.play();
+						
 						$(".panel[data-square='"+firstmove+"'").addClass("x-play");
 					}
 					else if(player2 === "O"){
-						captureSquare.play();
+					
 						$(".panel[data-square='"+firstmove+"'").addClass("o-play");
 					}
 					$(".panel[data-square='"+firstmove+"'").data("filled",true);
