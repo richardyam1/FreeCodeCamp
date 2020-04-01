@@ -1,0 +1,109 @@
+#calculator{
+	max-width: 600px;
+	width: 80%;
+	height: 650px;
+	background: #5499C7;
+	border-radius: 25px;
+	border: 5px solid;
+	margin: 0 auto;
+	margin-top: 200px;
+}
+
+#screen_border{
+	width: 500px;
+	height: 100px;
+	background: #7e7e7e;	
+	border: 5px solid;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+
+#screen{
+	width: 480px;
+	height: 80px;
+	background: #d3d3d3;
+	border-radius: 25px;
+	border: 5px solid;
+	margin: 0 auto;
+	margin-top: 5px;
+}
+
+#text{
+	margin-top: 10px;
+	color: white;
+}
+
+#solar{
+	width: 280px;
+	height: 50px;
+	background: #545454;
+	clear:left;
+	display: block;
+	border: 2px solid;
+}
+
+.solar_panel{
+	width: 64px;
+	height: 43px;
+	background: #545454;
+	border:3px solid;
+	float: left;
+}
+
+#input{
+	float: right;
+	font-size: 40px;
+	margin-right: 10px;	
+}
+
+#equation{
+	float: right;
+	font-size: 25px;
+	margin-top: 50px;
+	height: 10px;
+}
+
+.red_key{
+	background-color: red;
+	color: white;
+	width: 100px;
+	height: 50px;
+	font-size: 20px;
+	margin: 15px 11px;
+	border-radius: 12px;
+}
+
+.number{
+	background-color: white;
+	color: blue;
+	width: 100px;
+	height: 50px;
+	font-size: 20px;
+	margin: 13px 11px;
+	border-radius: 12px;
+}
+
+.zero{
+	background-color: white;
+	color: blue;
+	width: 226px;
+	height: 50px;
+	font-size: 20px;
+	margin: 13px 11px;
+	border-radius: 12px;
+}
+
+.decimal{
+	background-color: white;
+	color: blue;
+	width: 100px;
+	height: 50px;
+	font-size: 20px;
+	margin: 13px 11px;
+	border-radius: 12px;
+}
+
+#equal{
+	height: 122px;
+	float: right;
+}
